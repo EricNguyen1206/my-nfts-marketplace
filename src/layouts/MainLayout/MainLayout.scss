@@ -1,0 +1,11 @@
+@use "../../common/styles/" as *;
+
+.MuiContainer-root {
+    max-width: 1320px;
+}
+
+.layout_main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

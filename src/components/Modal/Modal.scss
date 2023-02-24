@@ -1,0 +1,14 @@
+@use "../../common/styles/" as *;
+
+$modal-background: #14141f8a;
+$modal-wrapper-width: 500px;
+$modal-wrapper-transform: 50%;
+$modal-btn-width: 120px;
+
+.modal {
+    &__content {
+        &--img {
+            border-radius: $rounded;
+        }
+    }
+}

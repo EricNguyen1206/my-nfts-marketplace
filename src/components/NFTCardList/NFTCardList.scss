@@ -1,0 +1,12 @@
+@use "../../common/styles/" as *;
+
+.nft-list {
+    &__card {
+        border-radius: $rounded;
+        &--action {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+    }
+}

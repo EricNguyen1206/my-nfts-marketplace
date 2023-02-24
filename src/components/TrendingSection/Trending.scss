@@ -1,0 +1,8 @@
+@use "../../common/styles/" as *;
+
+.trending {
+    width: $w-full;
+    &__title {
+        color: $light-1;
+    }
+}

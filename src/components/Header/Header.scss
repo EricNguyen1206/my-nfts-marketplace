@@ -1,0 +1,101 @@
+@use "../../common/styles/" as *;
+$bg-gradient-radius: -45deg;
+$icon-font: 40px;
+$header-shrink-box-shadow: 2px 2px 4px -2px $secondary-light;
+
+#header-shape-gradient {
+    --color-stop: #f12c06;
+    --color-bot: #faed34;
+}
+
+.header {
+    width: $w-full;
+    height: $space-64;
+    line-height: $space-64;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: $z-1000;
+
+    &__wrapper {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__shrink {
+        background: $dark-1;
+        box-shadow: $header-shrink-box-shadow;
+    }
+
+    &__logo {
+        h2 {
+            background: linear-gradient(
+                $bg-gradient-radius,
+                $secondary-light,
+                $primary-dark,
+                $secondary-light,
+                $primary-dark
+            );
+            background-size: $w-full $h-full;
+            background-clip: text;
+            -webkit-text-stroke: $mg-1 transparent;
+            -webkit-text-fill-color: $dark-1;
+            margin-bottom: $mg-0;
+
+            span {
+                display: flex;
+                align-items: center;
+                svg {
+                    fill: url(#header-shape-gradient) $secondary-light;
+                    font-size: $icon-font;
+                    margin-bottom: $mg-0;
+                }
+            }
+        }
+    }
+
+    &__nav {
+        &--list {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            column-gap: $mg-8;
+            margin-bottom: $mg-0;
+        }
+
+        &--item {
+            a {
+                text-decoration: none;
+                color: $white;
+                font-size: $fs-xl;
+                font-weight: $fw-300;
+                &:hover {
+                    color: $white;
+                }
+            }
+            .active {
+                color: $secondary-light !important;
+            }
+        }
+    }
+
+    &__right {
+        display: flex;
+        gap: $mg-2;
+        align-items: center;
+
+        &--avatar {
+            cursor: pointer;
+            svg {
+                font-size: 40px;
+            }
+        }
+
+        &--mobile-menu {
+            color: $white;
+            font-size: $fs-md;
+            display: none;
+        }
+    }
+}
