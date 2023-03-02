@@ -1,5 +1,12 @@
-import { createSagaAction } from "utils/actionCreator";
-import { Collection } from "models/collection/typings";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const loadNewCollections =
-    createSagaAction<Collection[]>("loadNewCollections");
+// INTERNAL
+import { getNewCollections } from "services/collectionApi";
+
+export const loadNewCollectionList = createAsyncThunk(
+    "collectionList/loadNewCollectionList",
+    async () => {
+        const data = await getNewCollections();
+        return data;
+    }
+);

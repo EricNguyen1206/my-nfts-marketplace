@@ -11,8 +11,8 @@ export interface Collection {
 }
 
 export interface CollectionModel {
-    nftList: Nft[];
+    nftList: (Nft | NftListing)[];
     data: Collection | null;
-    isLoading: boolean;
+    pending: boolean;
     error: boolean;
 }

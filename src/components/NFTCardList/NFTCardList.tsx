@@ -5,6 +5,7 @@ import {
     CardContent,
     CardMedia,
     Grid,
+    Stack,
     Typography,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -48,29 +49,41 @@ const NFTCardList = ({ nfts }: Props) => {
                             title={item.metadata.name}
                             className="nft-list__card--img"
                         />
-                        <CardContent>
-                            <Typography
-                                gutterBottom
-                                variant="h5"
-                                component="div"
-                            >
-                                {item.metadata.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                                {stringMinify(item.metadata.description, 60)}
-                            </Typography>
-                        </CardContent>
-                        <CardActions className="nft-list__card--action">
-                            <Button
-                                variant="contained"
-                                onClick={() => {
-                                    setSelectedNft(item);
-                                    setOpenModal(true);
-                                }}
-                            >
-                                Detail
-                            </Button>
-                        </CardActions>
+                        <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems="flex-end"
+                        >
+                            <CardContent>
+                                <Typography
+                                    gutterBottom
+                                    variant="h5"
+                                    component="div"
+                                >
+                                    {item.metadata.name}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                >
+                                    {stringMinify(
+                                        item.metadata.description,
+                                        25
+                                    )}
+                                </Typography>
+                            </CardContent>
+                            <CardActions className="nft-list__card--action">
+                                <Button
+                                    variant="contained"
+                                    onClick={() => {
+                                        setSelectedNft(item);
+                                        setOpenModal(true);
+                                    }}
+                                >
+                                    Detail
+                                </Button>
+                            </CardActions>
+                        </Stack>
                     </Card>
                 </Grid>
             ))}

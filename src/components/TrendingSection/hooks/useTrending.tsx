@@ -3,7 +3,7 @@ import { useEffect } from "react";
 // INTERNAL
 import { useAppDispatch, useAppSelector } from "hooks/useStoreHooks";
 import { CollectionListModel } from "models/collectionList/typings";
-import { loadNewCollections } from "models/collectionList/actions";
+import { loadNewCollectionList } from "models/collectionList";
 
 export type TrendingHook = {
     collectionList?: CollectionListModel;
@@ -16,8 +16,9 @@ export default function useTrending(): TrendingHook {
     const dispatch = useAppDispatch();
     const collectionList = useAppSelector((state) => state.collectionList);
     useEffect(() => {
-        dispatch(loadNewCollections.request());
+        dispatch(loadNewCollectionList());
     }, []);
+
     return {
         collectionList,
     };

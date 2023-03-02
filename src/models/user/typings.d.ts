@@ -1,20 +1,6 @@
-import { Model } from "../typings";
-
 export interface User {
-    _id?: string;
-    username: string;
-    password: string;
-    email: string;
-    isAdmin: boolean;
+    address: string;
+    avatar: string;
+    balance: number;
+    name: string;
 }
-
-export interface UserAuthentication {
-    user: User;
-    accessToken?: string;
-}
-
-export const initialUserState: Model<User> = {
-    data: null,
-    isFetching: false,
-    error: false,
-};

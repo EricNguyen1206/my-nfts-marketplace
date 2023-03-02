@@ -8,7 +8,6 @@ import useTrending from "./hooks/useTrending";
 
 const TrendingSection = () => {
     const { collectionList } = useTrending();
-
     return (
         <section className="trending">
             <Container>

@@ -1,6 +1,6 @@
 import Home from "pages/Home";
-import Cart from "pages/Cart/Cart";
 import Collection from "pages/Collection";
+import NFT from "pages/NFT";
 import { RoutesProps } from "./typings";
 
 export const publicRoutes: RoutesProps[] = [
@@ -14,13 +14,10 @@ export const publicRoutes: RoutesProps[] = [
     },
 ];
 
-export const userRoutes = [
+export const userRoutes: RoutesProps[] = [
+    ...publicRoutes,
     {
-        path: "/",
-        element: Home,
-    },
-    {
-        path: "/cart",
-        element: Cart,
+        path: "/nft/:tokenId",
+        element: NFT,
     },
 ];

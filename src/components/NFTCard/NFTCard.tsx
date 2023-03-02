@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { ShoppingBagOutlined } from "@mui/icons-material";
 
 import "./NFTCard.scss";
-import Modal from "../Modal/Modal";
-import { NFT } from "../../assets/data";
+import { NFT } from "assets/data";
 
 export type NFTCartProps = {
     item: NFT;
@@ -13,7 +12,7 @@ export type NFTCartProps = {
 const NFTCard = ({ item }: NFTCartProps) => {
     const { title, id, currentBid, creatorImg, imgUrl, creator } = item;
 
-    const [showModal, setShowModal] = useState<boolean>(false);
+    // const [showModal, setShowModal] = useState<boolean>(false);
 
     return (
         <div className="nft-card">
@@ -44,10 +43,7 @@ const NFTCard = ({ item }: NFTCartProps) => {
                 </div>
 
                 <div className="nft-card__actions">
-                    <button
-                        className="nft-card__actions--btn"
-                        onClick={() => setShowModal(true)}
-                    >
+                    <button className="nft-card__actions--btn">
                         <ShoppingBagOutlined /> Place Bid
                     </button>
 

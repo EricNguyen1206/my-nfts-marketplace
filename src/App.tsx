@@ -4,10 +4,11 @@ import { ThemeProvider } from "@mui/material";
 
 // INTERNAL
 import "./App.scss";
-import { publicRoutes } from "./routes";
+import { publicRoutes, userRoutes } from "./routes";
 import MainLayout from "./layouts/MainLayout";
 import useAppThemes from "./hooks/useAppThemes";
 import PageNotFound from "./pages/PageNotFound";
+import { useAppSelector } from "hooks/useStoreHooks";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 /**
@@ -17,8 +18,10 @@ const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
  */
 function App(): JSX.Element {
     const { colorMode, theme } = useAppThemes();
+    const { data } = useAppSelector((state) => state.user);
+
     const renderPage = () => {
-        const routes = publicRoutes;
+        const routes = data?.address ? userRoutes : publicRoutes;
         if (routes && routes.length > 0) {
             return (
                 <Fragment>

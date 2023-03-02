@@ -1,21 +1,19 @@
-import { Nft } from "models/nft/typings";
-import axiosCLient from "./axiosClient";
-
-export const getNfts = async (address: string) => {
-    const url = `/nftCollection/${address}/nft`;
+export const getNftByTokenId = async (contract: any, id: string) => {
     try {
-        const nfts: Nft[] = await axiosCLient.get(url);
-        return nfts;
+        const data = await contract.getActiveListing(contract, {
+            tokenId: id,
+        });
+        return data;
     } catch (e) {
-        console.log("e", e);
-        return [];
+        console.error(e);
+        return {};
     }
 };
 
 export const buyNft = async (contract: any, id: string) => {
     try {
-        const result = await contract?.buyoutListing(id, 1);
-        console.log("result", result);
+        const result: any = await contract?.buyoutListing(id, 1);
+        return result;
     } catch (e) {
         console.log("e", e);
     }

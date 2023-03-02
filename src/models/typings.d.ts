@@ -4,6 +4,6 @@ export type SagaParams<T> = {
 };
 export interface Model<T> {
     data: T | null;
-    isFetching: boolean;
+    pending: boolean;
     error: boolean;
 }

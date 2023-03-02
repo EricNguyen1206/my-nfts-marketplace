@@ -1,11 +1,16 @@
 import React, { useRef, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Typography, Container } from "@mui/material";
+import { Typography, Container, Avatar } from "@mui/material";
 import { SavingsOutlined } from "@mui/icons-material";
 import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 
 // INTERNAL
 import "./Header.scss";
+import { useAppDispatch, useAppSelector } from "hooks/useStoreHooks";
+// import { disconectUser, loadUserData } from "models/user/actions";
+import { Model } from "models/typings";
+import { User } from "models/user/typings";
+import { disconectUser, loadUserData } from "models/user";
 
 const NAV__LINKS = [
     {
@@ -29,10 +34,9 @@ const NAV__LINKS = [
 const Header = () => {
     const headerRef = useRef<HTMLInputElement>(null);
     const menuRef = useRef<HTMLDivElement>(null);
+    const dispatch = useAppDispatch();
     const address = useAddress();
-
-    console.log("address", address);
-
+    const user: Model<User> = useAppSelector((state) => state.user);
     useEffect(() => {
         window.addEventListener("scroll", () => {
             if (
@@ -49,6 +53,14 @@ const Header = () => {
             window.removeEventListener("scroll", () => {});
         };
     }, []);
+
+    useEffect(() => {
+        if (address) {
+            dispatch(loadUserData(address));
+        } else {
+            dispatch(disconectUser());
+        }
+    }, [address]);
 
     const toggleMenu = () => menuRef.current?.classList.toggle("active__menu");
 
@@ -93,6 +105,14 @@ const Header = () => {
 
                 <div className="header__right">
                     <ConnectWallet />
+                    {user.data && (
+                        <Link to={`${user.data.address}`}>
+                            <Avatar
+                                alt={`${user.data.name}`}
+                                src={`${user.data.avatar}`}
+                            />
+                        </Link>
+                    )}
                 </div>
             </Container>
         </header>

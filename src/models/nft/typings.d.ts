@@ -22,4 +22,17 @@ export interface NftAttributes {
     value: string;
 }
 
-export interface NftsModel extends Model<Nft> {}
+export interface BuyOutData {
+    name: String;
+    symbol: string;
+    decimals: number;
+    displayValue: string;
+}
+
+export interface NftListing {
+    asset: NftMetadata;
+    assetContractAddress: string;
+    buyoutCurrencyValuePerToken: BuyOutData;
+    currencyContractAddress: string;
+    id: string;
+}
