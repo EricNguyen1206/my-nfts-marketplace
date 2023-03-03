@@ -20,3 +20,7 @@ jwt.http
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# ssh key
+mykey.txt
+mykey.txt.pub

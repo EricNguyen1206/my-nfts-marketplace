@@ -1,12 +1,16 @@
+import { NftListing } from "models/nft/typings";
+
 export const getNftByTokenId = async (contract: any, id: string) => {
     try {
-        const data = await contract.getActiveListing(contract, {
-            tokenId: id,
-        });
-        return data;
+        if (contract) {
+            const data: NftListing = await contract.getListing(id);
+            console.log("data", data);
+            return data;
+        }
+        throw new Error("Contract invalid!");
     } catch (e) {
         console.error(e);
-        return {};
+        throw new Error("Contract invalid!");
     }
 };
 

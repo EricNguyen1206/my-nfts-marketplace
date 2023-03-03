@@ -56,10 +56,15 @@ export const getNftListByContract = async (
         const data: any = await contract?.getActiveListings({
             tokenContract: address,
         });
-        return data;
+        console.log("data", data);
+        if (data) {
+            return data;
+        } else {
+            return [];
+        }
     } catch (e) {
         console.error(e);
-        return [];
+        throw new Error("Invalid contract collection!");
     }
 };
 

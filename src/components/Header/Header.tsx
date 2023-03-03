@@ -106,7 +106,7 @@ const Header = () => {
                 <div className="header__right">
                     <ConnectWallet />
                     {user.data && (
-                        <Link to={`${user.data.address}`}>
+                        <Link to="/profile">
                             <Avatar
                                 alt={`${user.data.name}`}
                                 src={`${user.data.avatar}`}

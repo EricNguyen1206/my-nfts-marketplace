@@ -11,7 +11,6 @@ import {
     Stack,
     Typography,
 } from "@mui/material";
-import { Toaster } from "react-hot-toast";
 import React from "react";
 
 // INTERNAL
@@ -20,12 +19,15 @@ import useCollection from "./hooks/useCollection";
 import { NftListing } from "models/nft/typings";
 
 const Collection = () => {
-    const { collection, theme, handleBuy, handleDetailNavigate } =
-        useCollection();
+    const {
+        collection,
+        theme,
+        handleBuyNftInCollection,
+        handleDetailNavigate,
+    } = useCollection();
 
     return (
         <React.Fragment>
-            <Toaster />
             <Container className="collection">
                 <Grid container className="collection__overview">
                     <Grid item lg={2} md={3} className="collection__img">
@@ -303,7 +305,9 @@ const Collection = () => {
                                                         },
                                                     }}
                                                     onClick={() =>
-                                                        handleBuy(nft.id)
+                                                        handleBuyNftInCollection(
+                                                            nft.id
+                                                        )
                                                     }
                                                 >
                                                     Buy

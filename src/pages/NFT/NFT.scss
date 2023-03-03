@@ -1,12 +1,13 @@
 @use "common/styles/" as *;
 
 .nft {
-    margin-top: 66px;
+    margin: $space-80 0;
     &__image {
         width: $w-full;
         flex: 1;
         img {
             width: $w-full;
+            padding: $mg-1;
             border: 1px solid $primary;
             border-radius: $rounded;
         }
@@ -42,11 +43,11 @@
             font-size: large;
         }
         &--btn {
-            margin: $mg-4 0;
+            margin: $mg-4 0 !important;
         }
     }
 
     &__properties {
-        margin-top: $mg-4;
+        margin-top: $mg-4 !important;
     }
 }

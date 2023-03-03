@@ -1,6 +1,5 @@
 import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Toaster } from "react-hot-toast";
 
 // INTERNAL
 const HeroSection = React.lazy(() => import("components/HeroSection"));
@@ -12,7 +11,6 @@ const GuideSection = React.lazy(() => import("components/GuideSection"));
 const Home = () => {
     return (
         <React.Fragment>
-            <Toaster />
             <React.Suspense fallback={<CircularProgress />}>
                 <HeroSection />
             </React.Suspense>

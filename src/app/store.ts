@@ -4,11 +4,13 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import collectionListReducers from "models/collectionList";
 import collectionReducers from "models/collection";
 import userReducer from "models/user";
+import nftReducer from "models/nft";
 
 const store = configureStore({
     reducer: {
         collectionList: collectionListReducers,
         collection: collectionReducers,
+        nft: nftReducer,
         user: userReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),

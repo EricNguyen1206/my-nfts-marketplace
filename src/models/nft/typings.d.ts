@@ -30,9 +30,10 @@ export interface BuyOutData {
 }
 
 export interface NftListing {
+    id: string;
     asset: NftMetadata;
     assetContractAddress: string;
     buyoutCurrencyValuePerToken: BuyOutData;
     currencyContractAddress: string;
-    id: string;
+    sellerAddress?: string;
 }

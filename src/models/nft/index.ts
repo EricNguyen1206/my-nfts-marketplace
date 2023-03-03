@@ -15,7 +15,9 @@ const nftSlice = createSlice({
             })
             .addCase(loadNFTData.fulfilled, (state, action) => {
                 state.pending = false;
-                state.data = action.payload;
+                if (action.payload) {
+                    state.data = action.payload;
+                }
             })
             .addCase(loadNFTData.rejected, (state, action) => {
                 state.pending = false;

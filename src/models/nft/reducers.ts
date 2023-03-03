@@ -1,8 +1,8 @@
 // INTERNAL
 import { Model } from "models/typings";
-import { Nft } from "./typings";
+import { NftListing } from "./typings";
 
-export const initialState: Model<Nft> = {
+export const initialState: Model<NftListing> = {
     data: null,
     pending: false,
     error: false,

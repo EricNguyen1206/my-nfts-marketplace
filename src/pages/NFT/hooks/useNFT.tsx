@@ -1,12 +1,16 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useContract } from "@thirdweb-dev/react";
+import { useTheme } from "@mui/material";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 // INTERNAL
-import { useAppDispatch } from "hooks/useStoreHooks";
+import useMarketplace from "hooks/useMarketplace";
+import { useAppDispatch, useAppSelector } from "hooks/useStoreHooks";
 import { loadNFTData } from "models/nft";
-import { useTheme } from "@mui/material";
+import { Model } from "models/typings";
+import { NftListing } from "models/nft/typings";
+import { useHandleBuy } from "hooks/useHandleBuy";
 
 /**
  * implement logic and handle every side-effect of the component here
@@ -15,19 +19,30 @@ import { useTheme } from "@mui/material";
 export default function useNFT() {
     const { tokenId } = useParams();
     const theme = useTheme();
+    const navigate = useNavigate();
+
     const dispatch = useAppDispatch();
-    const { contract } = useContract(
-        process.env.REACT_APP_MARKETPLACE,
-        "marketplace"
-    );
+    const marketplace = useMarketplace();
+    const handleBuy = useHandleBuy();
+    const nft: Model<NftListing> = useAppSelector((state) => state.nft);
+
+    const handleBuyNft = () => {
+        if (tokenId) {
+            handleBuy(tokenId + "", () => {
+                navigate(-1);
+            });
+        } else {
+            toast.error("NFT undefined!");
+        }
+    };
 
     useEffect(() => {
-        if (tokenId) {
-            dispatch(loadNFTData({ contract, tokenId }));
+        if (tokenId && marketplace) {
+            dispatch(loadNFTData({ contract: marketplace, tokenId }));
         } else {
             toast.error("NFT token ID is not exit!");
         }
-    }, []);
+    }, [tokenId, marketplace]);
 
-    return { theme };
+    return { theme, nft, handleBuyNft };
 }
