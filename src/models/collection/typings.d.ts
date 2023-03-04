@@ -1,6 +1,7 @@
 export interface Collection {
     contractAddress: string;
     name: string;
+    creator?: string;
     image?: string | undefined;
     description?: string | undefined;
     seller_fee_basis_points?: number;

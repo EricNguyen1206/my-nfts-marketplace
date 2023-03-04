@@ -5,7 +5,6 @@ import { Container, Grid } from "@mui/material";
 // INTERNAL
 import "./TopVolume.scss";
 import { NFT__DATA } from "assets/data";
-import NFTCard from "../NFTCard";
 
 const TopVolume = () => {
     return (
@@ -30,7 +29,7 @@ const TopVolume = () => {
                             sm={6}
                             className="top-volume__item"
                         >
-                            <NFTCard item={item} />
+                            {/* <NFTCard item={item} /> */}
                         </Grid>
                     ))}
                 </Grid>

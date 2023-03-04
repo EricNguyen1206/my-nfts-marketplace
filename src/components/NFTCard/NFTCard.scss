@@ -1,4 +1,4 @@
-@use "../../common/styles/" as *;
+@use "styles/" as *;
 
 .nft-card {
     width: $w-full;
@@ -30,7 +30,7 @@
         }
 
         @include tablet {
-          font-size: $fs-sm !important;
+            font-size: $fs-sm !important;
         }
     }
 
@@ -66,12 +66,12 @@
             }
 
             @include tablet {
-              h6 {
-                  font-size: $fs-xs !important;
-              }
-              p {
-                font-size: $fs-xs !important;
-    }
+                h6 {
+                    font-size: $fs-xs !important;
+                }
+                p {
+                    font-size: $fs-xs !important;
+                }
             }
         }
     }
@@ -101,8 +101,8 @@
             }
 
             @include tablet {
-              padding: $mg-1 $mg-5 !important;
-              font-size: $fs-xs !important;
+                padding: $mg-1 $mg-5 !important;
+                font-size: $fs-xs !important;
             }
         }
 
@@ -115,9 +115,9 @@
                     color: $light-1;
                 }
 
-              @include tablet {
-                font-size: $fs-xs !important;
-              }
+                @include tablet {
+                    font-size: $fs-xs !important;
+                }
             }
         }
     }

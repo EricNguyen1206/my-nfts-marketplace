@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useTheme } from "@mui/material";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSDK } from "@thirdweb-dev/react";
 
 // INTERNAL
@@ -13,7 +13,6 @@ import useMarketplace from "hooks/useMarketplace";
 const useCollection = () => {
     const param = useParams();
     const theme = useTheme();
-    const navigate = useNavigate();
     const sdk = useSDK();
 
     const marketplace = useMarketplace();
@@ -23,9 +22,6 @@ const useCollection = () => {
         (state) => state.collection
     );
 
-    const handleDetailNavigate = (tokenId: string) => {
-        navigate(`/nft/${tokenId}`);
-    };
     const handleBuyNftInCollection = (tokenId: string) => {
         handleBuy(tokenId, () =>
             dispatch(
@@ -57,7 +53,6 @@ const useCollection = () => {
         collection,
         theme,
         handleBuyNftInCollection,
-        handleDetailNavigate,
     };
 };
 

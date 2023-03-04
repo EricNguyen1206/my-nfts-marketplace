@@ -14,6 +14,22 @@ export const getNftByTokenId = async (contract: any, id: string) => {
     }
 };
 
+export const getListNftByAddress = async (contract: any, address: string) => {
+    try {
+        if (contract) {
+            const data: NftListing[] = await contract.getAllListings({
+                seller: address,
+            });
+            console.log("data", data);
+            return data;
+        }
+        throw new Error("Contract invalid!");
+    } catch (e) {
+        console.error(e);
+        throw new Error("Contract invalid!");
+    }
+};
+
 export const buyNft = async (contract: any, id: string) => {
     try {
         const result: any = await contract?.buyoutListing(id, 1);

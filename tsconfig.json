@@ -20,7 +20,8 @@
         "skipLibCheck": true,
         "sourceMap": true,
         "strict": true,
-        "target": "es2018"
+        "target": "es2018",
+        "types": ["node"]
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.jpg", "**/*.png"],
     "extends": "./tsconfig.paths.json",

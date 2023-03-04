@@ -1,13 +1,13 @@
-@use "../../common/styles/" as *;
+@use "styles/" as *;
 .register {
     width: 100vw;
     height: 100vh;
     background: linear-gradient(
-        rgba(255, 255, 255, 0.5),
-        rgba(255, 255, 255, 0.5)
-      ),
-      url("https://firebasestorage.googleapis.com/v0/b/my-ecommerce-app-770f8.appspot.com/o/header.webp?alt=media&token=da7740bc-026d-4290-a6a3-fdd104685812")
-        center;
+            rgba(255, 255, 255, 0.5),
+            rgba(255, 255, 255, 0.5)
+        ),
+        url("https://firebasestorage.googleapis.com/v0/b/my-ecommerce-app-770f8.appspot.com/o/header.webp?alt=media&token=da7740bc-026d-4290-a6a3-fdd104685812")
+            center;
     background-size: cover;
     display: flex;
     align-items: center;

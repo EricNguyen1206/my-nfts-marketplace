@@ -1,16 +1,16 @@
 import { Marketplace } from "@thirdweb-dev/sdk";
-import { ref, child, get } from "firebase/database";
+import { child, ref, query, get } from "firebase/database";
+// import { equalTo } from "@firebase/database";
 
-// INTErNAL
+// INTERNAL
 import { firebaseDatabase } from "./firebase";
-// import { Collection } from "models/collection/typings";
+import { Collection } from "models/collection/typings";
 
 /**
  *
  * @return {Array} return list of collection
  */
 export const getNewCollections = async () => {
-    console.log("first");
     try {
         const dbRef = ref(firebaseDatabase);
         const snapshot = await get(child(dbRef, `collections`));
@@ -83,5 +83,24 @@ export const getCollectionNftList = async (contract: any) => {
         }
     } catch (e) {
         return [];
+    }
+};
+
+export const getCollectionListByAddress = async (
+    address: string
+): Promise<Collection[]> => {
+    try {
+        const dbRef = ref(firebaseDatabase, `collections`);
+        const snapshot = await get(query(dbRef));
+        if (snapshot && snapshot.val()) {
+            console.log("snapshot.val()", address);
+            return snapshot
+                .val()
+                .filter((item: Collection) => item.creator === address);
+        } else {
+            return [];
+        }
+    } catch (e) {
+        throw new Error("Fetching resource error!");
     }
 };

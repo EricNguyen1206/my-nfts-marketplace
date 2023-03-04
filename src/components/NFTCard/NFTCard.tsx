@@ -1,62 +1,76 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { ShoppingBagOutlined } from "@mui/icons-material";
+import {
+    Card,
+    CardContent,
+    CardMedia,
+    Typography,
+    useTheme,
+} from "@mui/material";
 
+// INTERNAL
 import "./NFTCard.scss";
-import { NFT } from "assets/data";
+import { NftListing } from "models/nft/typings";
 
 export type NFTCartProps = {
-    item: NFT;
+    nft: NftListing;
 };
 
-const NFTCard = ({ item }: NFTCartProps) => {
-    const { title, id, currentBid, creatorImg, imgUrl, creator } = item;
-
-    // const [showModal, setShowModal] = useState<boolean>(false);
-
+const NFTCard = ({ nft }: NFTCartProps) => {
+    const theme = useTheme();
     return (
-        <div className="nft-card">
-            <div className="nft-card__img">
-                <img src={imgUrl} alt="" />
+        <Card
+            sx={{
+                maxWidth: 278,
+                backgroundColor: theme.palette.background.paper,
+                borderRadius: "8px",
+            }}
+            className="nft-list__card"
+        >
+            <div
+                style={{
+                    overflow: "hidden",
+                    width: "100%",
+                }}
+            >
+                <CardMedia
+                    sx={{
+                        height: 278,
+                        cursor: "pointer",
+                        transition: "ease .5s",
+                        "&:hover": {
+                            scale: "1.1 !important",
+                        },
+                    }}
+                    image={nft.asset.image}
+                    title={nft.asset.name}
+                    className="nft-list__card--img"
+                />
             </div>
-
-            <div className="nft-card__content">
-                <h5 className="nft-card__title">
-                    <Link to={`/market/${id}`}>{title}</Link>
-                </h5>
-
-                <div className="nft-card__info">
-                    <div className="nft-card__info--creator">
-                        <img src={creatorImg} alt="" />
-                    </div>
-
-                    <div className="nft-card__info--detail">
-                        <div>
-                            <h6>Created By</h6>
-                            <p>{creator}</p>
-                        </div>
-                        <div>
-                            <h6>Current Bid</h6>
-                            <p>{currentBid} ETH</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="nft-card__actions">
-                    <button className="nft-card__actions--btn">
-                        <ShoppingBagOutlined /> Place Bid
-                    </button>
-
-                    {/* {showModal && (
-                        <Modal open={showModal} setOpen={setShowModal} />
-                    )} */}
-
-                    <span className="nft-card__actions--link">
-                        <Link to="#">View History</Link>
-                    </span>
-                </div>
-            </div>
-        </div>
+            <CardContent sx={{ paddingBottom: "8px" }}>
+                <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="div"
+                    sx={{
+                        fontSize: ".8rem",
+                        fontWeight: 600,
+                    }}
+                >
+                    {nft.asset.name}
+                </Typography>
+                <Typography
+                    variant="body2"
+                    component="span"
+                    color="text.primary"
+                    sx={{
+                        fontSize: "1rem",
+                        fontWeight: 600,
+                    }}
+                >
+                    {nft.asset.description}
+                </Typography>
+            </CardContent>
+        </Card>
     );
 };
 
