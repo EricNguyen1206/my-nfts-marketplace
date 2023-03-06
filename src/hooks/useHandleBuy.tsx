@@ -6,16 +6,15 @@ import toast from "react-hot-toast";
 import { useAppSelector } from "./useStoreHooks";
 import useMarketplace from "./useMarketplace";
 /**
- *
+ * @useHandleBuy hook handle buy nft and notify for user the result
  * @return {any}
  */
-function useHandleBuy() {
+function useHandleBuy(): any {
     const user = useAppSelector((state) => state.user);
     const marketplace = useMarketplace();
     const { mutateAsync: buyNow } = useBuyNow(marketplace);
 
     const handleBuy = async (tokenId: string, next: any) => {
-        console.log("handle Buy: ", tokenId);
         try {
             if (user.data) {
                 if (tokenId) {

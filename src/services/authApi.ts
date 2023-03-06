@@ -12,11 +12,7 @@ const authApi = {
     },
 };
 
-export type RefreshTokenReturnType = {
-    refreshToken: string;
-};
-
-export const refreshToken = async (): Promise<RefreshTokenReturnType> => {
+const refreshToken = async (): Promise<RefreshTokenReturnType> => {
     const user = JSON.parse(localStorage.getItem("user") || "");
     const JWTToken = user.refreshToken;
     const url = "/auth/refreshToken";
@@ -24,4 +20,7 @@ export const refreshToken = async (): Promise<RefreshTokenReturnType> => {
     return res.data;
 };
 
-export { authApi };
+export { authApi, refreshToken };
+export type RefreshTokenReturnType = {
+    refreshToken: string;
+};

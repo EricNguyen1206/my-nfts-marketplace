@@ -1,6 +1,7 @@
 @use "styles/" as *;
 
 .seller-section {
+    width: $w-full;
     &__title h3 {
         color: $light-1;
     }

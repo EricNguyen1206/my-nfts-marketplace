@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// Initial axios instance
 const axiosCLient = axios.create({
     baseURL:
         process.env.NODE_ENV === "development"

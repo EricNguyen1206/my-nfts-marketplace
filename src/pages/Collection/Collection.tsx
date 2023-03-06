@@ -82,7 +82,7 @@ const Collection = () => {
                                                     .primary,
                                             }}
                                         >
-                                            124 GOR
+                                            6.05 GOR
                                         </Typography>
                                         <Typography
                                             variant="subtitle1"
@@ -106,7 +106,7 @@ const Collection = () => {
                                                     .primary,
                                             }}
                                         >
-                                            124 GOR
+                                            0.009 GOR
                                         </Typography>
                                         <Typography
                                             variant="subtitle1"
@@ -130,10 +130,12 @@ const Collection = () => {
                                                     .primary,
                                             }}
                                         >
-                                            {
+                                            {collection.data
+                                                ?.seller_fee_basis_points &&
                                                 collection.data
-                                                    ?.seller_fee_basis_points
-                                            }
+                                                    ?.seller_fee_basis_points /
+                                                    100 +
+                                                    " %"}
                                         </Typography>
                                         <Typography
                                             variant="subtitle1"

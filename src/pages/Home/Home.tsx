@@ -3,7 +3,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 // INTERNAL
 const HeroSection = React.lazy(() => import("components/HeroSection"));
-const TopVolume = React.lazy(() => import("components/TopVolume"));
+const CategorySection = React.lazy(() => import("components/CategorySection"));
 const SellerSection = React.lazy(() => import("components/SellerSection"));
 const TrendingSection = React.lazy(() => import("components/TrendingSection"));
 const GuideSection = React.lazy(() => import("components/GuideSection"));
@@ -16,7 +16,7 @@ const Home = () => {
             </React.Suspense>
 
             <React.Suspense fallback={<CircularProgress />}>
-                <TopVolume />
+                <TrendingSection />
             </React.Suspense>
 
             <React.Suspense fallback={<CircularProgress />}>
@@ -24,7 +24,7 @@ const Home = () => {
             </React.Suspense>
 
             <React.Suspense fallback={<CircularProgress />}>
-                <TrendingSection />
+                <CategorySection />
             </React.Suspense>
 
             <React.Suspense fallback={<CircularProgress />}>

@@ -41,7 +41,7 @@ function useProfile() {
         })();
     }, [user, marketplace]);
 
-    return { theme, nftList, collectionList };
+    return { user, theme, nftList, collectionList };
 }
 
 export default useProfile;

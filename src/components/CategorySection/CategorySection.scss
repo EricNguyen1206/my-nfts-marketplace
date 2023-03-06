@@ -1,6 +1,7 @@
 @use "styles/" as *;
 
 .top-volume {
+    margin-top: $mg-4;
     width: $w-100vw;
 
     &__top {

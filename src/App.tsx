@@ -21,7 +21,7 @@ function App(): JSX.Element {
     const { data } = useAppSelector((state) => state.user);
 
     const renderPage = () => {
-        const routes = data?.address ? userRoutes : publicRoutes;
+        const routes = data ? userRoutes : publicRoutes;
         if (routes && routes.length > 0) {
             return (
                 <Fragment>

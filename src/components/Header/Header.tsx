@@ -7,10 +7,9 @@ import { ConnectWallet, useAddress } from "@thirdweb-dev/react";
 // INTERNAL
 import "./Header.scss";
 import { useAppDispatch, useAppSelector } from "hooks/useStoreHooks";
-// import { disconectUser, loadUserData } from "models/user/actions";
 import { Model } from "models/typings";
 import { User } from "models/user/typings";
-import { disconectUser, loadUserData } from "models/user";
+import { disconectUser, readUserData } from "models/user";
 
 const NAV__LINKS = [
     {
@@ -18,16 +17,16 @@ const NAV__LINKS = [
         url: "/",
     },
     {
-        display: "Market",
-        url: "/market",
+        display: "Art",
+        url: "/category/art",
     },
     {
-        display: "Create",
-        url: "/create",
+        display: "Photograph",
+        url: "/category/photography",
     },
     {
-        display: "Contact",
-        url: "/contact",
+        display: "Membership",
+        url: "/category/membership",
     },
 ];
 
@@ -56,7 +55,7 @@ const Header = () => {
 
     useEffect(() => {
         if (address) {
-            dispatch(loadUserData(address));
+            dispatch(readUserData(address));
         } else {
             dispatch(disconectUser());
         }

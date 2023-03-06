@@ -1,12 +1,14 @@
 import React from "react";
-import "./SellerSection.scss";
-import { SELLER__DATA } from "../../assets/data";
 import { Container, Grid } from "@mui/material";
+
+// INTERNAL
+import "./SellerSection.scss";
+import { SELLER__DATA } from "assets/data";
 
 const SellerSection = () => {
     return (
         <section className="seller-section">
-            <Container maxWidth="lg">
+            <Container>
                 <Grid container>
                     <Grid
                         item
@@ -20,20 +22,18 @@ const SellerSection = () => {
                     {SELLER__DATA.map((item) => (
                         <Grid
                             item
-                            key={item.id}
-                            lg={2}
-                            md={3}
+                            key={item.address}
                             sm={4}
                             xs={6}
                             className="seller-section__card"
                         >
                             <div className="seller-section__card--img">
-                                <img src={item.sellerImg} alt="" />
+                                <img src={item.avatar} alt="" />
                             </div>
 
                             <div className="seller-section__card--content">
-                                <h6>{item.sellerName}</h6>
-                                <h6>{item.currentBid} ETH</h6>
+                                <h6>{item.name}</h6>
+                                <h6>{item.balance} GOR</h6>
                             </div>
                         </Grid>
                     ))}

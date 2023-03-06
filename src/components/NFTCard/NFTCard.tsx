@@ -10,6 +10,7 @@ import {
 // INTERNAL
 import "./NFTCard.scss";
 import { NftListing } from "models/nft/typings";
+import { stringMinify } from "utils/stringMinify";
 
 export type NFTCartProps = {
     nft: NftListing;
@@ -67,7 +68,7 @@ const NFTCard = ({ nft }: NFTCartProps) => {
                         fontWeight: 600,
                     }}
                 >
-                    {nft.asset.description}
+                    {stringMinify(nft.asset.description, 40)}
                 </Typography>
             </CardContent>
         </Card>
