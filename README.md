@@ -34,7 +34,7 @@
 ![image](https://user-images.githubusercontent.com/63888253/223164312-c783cfb7-0450-49ba-a185-9edb0ff33695.png)
 
 - Category page
-![image](https://user-images.githubusercontent.com/63888253/223164528-f087612e-de5c-498c-abb2-b18068016762.png)
+![image](https://user-images.githubusercontent.com/63888253/223165485-ebde104c-121c-4347-af29-413151b4999e.png)
 
 - NFT page
 ![image](https://user-images.githubusercontent.com/63888253/223164718-4bbd1126-8ae6-4e96-8923-2cdd08c3301e.png)
