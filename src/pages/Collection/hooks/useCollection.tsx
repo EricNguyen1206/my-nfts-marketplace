@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useSDK } from "@thirdweb-dev/react";
@@ -15,9 +15,12 @@ const useCollection = () => {
     const theme = useTheme();
     const sdk = useSDK();
 
+    const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+
     const marketplace = useMarketplace();
     const handleBuy = useHandleBuy();
     const dispatch = useAppDispatch();
+    const user = useAppSelector((state) => state.user);
     const collection: CollectionModel = useAppSelector(
         (state) => state.collection
     );
@@ -50,8 +53,12 @@ const useCollection = () => {
     }, [marketplace]);
 
     return {
-        collection,
+        user,
         theme,
+        param,
+        collection,
+        openDrawer,
+        setOpenDrawer,
         handleBuyNftInCollection,
     };
 };

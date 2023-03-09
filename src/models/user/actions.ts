@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
-import { postNewCollection } from "services/collectionApi";
 
 // INTERNAL
+import { postNewCollection } from "services/collectionApi";
 import { getUserData } from "services/userApi";
 import { User } from "./typings";
 
@@ -14,16 +14,20 @@ const createNewCollection = createAsyncThunk(
         sdk,
         name,
         description,
+        category,
         image,
         fee_recipient,
         primary_sale_recipient,
+        seller_fee_basis_points,
     }: {
         sdk: any;
         name: string;
         description: string;
         image: any;
+        category: string;
         fee_recipient: string;
         primary_sale_recipient: string;
+        seller_fee_basis_points: number;
     }) => {
         try {
             if (sdk && name && description && primary_sale_recipient) {
@@ -31,14 +35,19 @@ const createNewCollection = createAsyncThunk(
                     postNewCollection(
                         sdk,
                         name,
-                        description,
                         image,
+                        category,
+                        description,
                         fee_recipient,
-                        primary_sale_recipient
+                        primary_sale_recipient,
+                        seller_fee_basis_points
                     ),
                     {
                         loading: "Transaction processing...",
-                        success: "Transaction success!",
+                        success: (collection) => {
+                            console.log("collection", collection);
+                            return "Transaction success!";
+                        },
                         error: "Error when deploying your contract 😥",
                     },
                     {

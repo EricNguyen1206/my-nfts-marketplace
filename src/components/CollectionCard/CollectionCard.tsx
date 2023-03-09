@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 // INTERNAL
 import "./CollectionCard.scss";
 import { Collection } from "models/collection/typings";
+import { stringMinify } from "utils/stringMinify";
 
 type CollectionCardProps = {
     collection: Collection;
@@ -33,7 +34,7 @@ const CollectionCard = ({ collection }: CollectionCardProps) => {
                 />
                 <CardContent className="collection-card--content">
                     <Typography gutterBottom variant="h5" component="div">
-                        {collection.name}
+                        {stringMinify(collection.name, 28)}
                     </Typography>
                     <Stack
                         direction="row"

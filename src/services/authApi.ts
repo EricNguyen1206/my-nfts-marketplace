@@ -1,4 +1,4 @@
-import axiosCLient from "./axiosClient";
+import axiosCLient from "utils/axiosClient";
 
 const authApi = {
     async login(account: any) {

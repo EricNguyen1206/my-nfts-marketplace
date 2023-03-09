@@ -1,0 +1,31 @@
+@use "styles/" as *;
+
+$img-max-width: 168px;
+$description-max-width: 886px;
+
+.collection__img {
+    div {
+        max-width: $img-max-width;
+        max-height: $img-max-width;
+        padding: $mg-1;
+        background-color: $white;
+        border-radius: $rounded;
+        img {
+            width: $w-full;
+            border-radius: $rounded;
+        }
+    }
+}
+.collection__info {
+    &--name {
+        font-size: $fs-max;
+    }
+    &--description {
+        margin-top: $mg-5;
+        max-width: $description-max-width;
+    }
+}
+
+.collection__index {
+    margin-top: $mg-8;
+}

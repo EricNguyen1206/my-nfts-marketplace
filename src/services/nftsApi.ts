@@ -1,5 +1,5 @@
 // INTERNAL
-import { NftListing } from "models/nft/typings";
+import { NftListing, NftMetadata } from "models/nft/typings";
 
 /**
  * @getNftByTokenId get nft by tokenId from marketplace
@@ -45,13 +45,17 @@ const getListNftByAddress = async (
     }
 };
 
-// export const buyNft = async (contract: any, id: string) => {
-//     try {
-//         const result: any = await contract?.buyoutListing(id, 1);
-//         return result;
-//     } catch (e: any) {
-//         throw new Error("Contract invalid!", e);
-//     }
-// };
+const postNewNft = async (
+    contract: any,
+    walletAddress: string,
+    data: NftMetadata
+) => {
+    try {
+        const result = await contract.mintTo(walletAddress, data);
+        return result;
+    } catch (e: any) {
+        throw new Error("Mint Nft Failed!", e);
+    }
+};
 
-export { getNftByTokenId, getListNftByAddress };
+export { getNftByTokenId, getListNftByAddress, postNewNft };

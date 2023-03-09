@@ -29,6 +29,7 @@ function useProfile() {
             }
         })();
     }, [user]);
+
     useEffect(() => {
         (async () => {
             if (user.data) {

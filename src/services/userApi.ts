@@ -3,7 +3,7 @@ import { equalTo } from "@firebase/database";
 import { ref, query, get, orderByChild } from "firebase/database";
 
 // INTERNAL
-import { firebaseDatabase } from "./firebase";
+import { firebaseDatabase } from "utils/firebase";
 import { User } from "models/user/typings";
 
 /**
