@@ -5,10 +5,14 @@ import { useSDK } from "@thirdweb-dev/react";
 
 // INTERNAL
 import { useAppDispatch, useAppSelector } from "hooks/useStoreHooks";
-import { loadCollectionData, loadNftListByContract } from "models/collection";
+import {
+    readCollectionData,
+    readActiveNftListDataByMarketplace,
+} from "models/collection";
 import { CollectionModel } from "models/collection/typings";
 import { useHandleBuy } from "hooks/useHandleBuy";
 import useMarketplace from "hooks/useMarketplace";
+import { readNftListDataByCollection } from "models/collection/actions";
 
 const useCollection = () => {
     const param = useParams();
@@ -28,7 +32,7 @@ const useCollection = () => {
     const handleBuyNftInCollection = (tokenId: string) => {
         handleBuy(tokenId, () =>
             dispatch(
-                loadNftListByContract({
+                readActiveNftListDataByMarketplace({
                     contract: marketplace,
                     address: param.address + "",
                 })
@@ -42,15 +46,26 @@ const useCollection = () => {
                 param.address + "",
                 "nft-collection"
             );
-            dispatch(loadCollectionData(contract));
-            dispatch(
-                loadNftListByContract({
-                    contract: marketplace,
-                    address: param.address + "",
-                })
-            );
+            if (contract) {
+                dispatch(readCollectionData(contract));
+            }
+            if (
+                user.data &&
+                collection.data &&
+                contract &&
+                user.data.address === collection.data.fee_recipient
+            ) {
+                dispatch(readNftListDataByCollection({ collection: contract }));
+            } else {
+                dispatch(
+                    readActiveNftListDataByMarketplace({
+                        contract: marketplace,
+                        address: param.address + "",
+                    })
+                );
+            }
         })();
-    }, [marketplace]);
+    }, [marketplace, user.data]);
 
     return {
         user,

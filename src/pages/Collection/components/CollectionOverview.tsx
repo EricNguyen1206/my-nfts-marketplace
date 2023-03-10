@@ -15,6 +15,7 @@ type Props = {
 
 const CollectionOverview = ({ collection, user }: Props) => {
     const theme = useTheme();
+    console.log("collection", collection);
     return (
         <Grid container className="collection__overview" spacing={2}>
             <Grid item lg={2} md={3} xs={12} className="collection__img">
@@ -31,7 +32,7 @@ const CollectionOverview = ({ collection, user }: Props) => {
                     }}
                     sx={{ width: "100%" }}
                 >
-                    {collection.pending || collection.error ? (
+                    {collection.pending ? (
                         <Skeleton
                             variant="rectangular"
                             width={168}
@@ -50,7 +51,7 @@ const CollectionOverview = ({ collection, user }: Props) => {
                 </Stack>
             </Grid>
             <Grid item lg={10} md={9} className="collection__info">
-                {collection.pending || collection.error ? (
+                {collection.pending ? (
                     <React.Fragment>
                         <Skeleton />
                         <Skeleton />

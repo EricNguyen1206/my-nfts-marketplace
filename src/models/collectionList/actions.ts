@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Collection } from "models/collection/typings";
 
 // INTERNAL
 import {
     getCollectionListByCategory,
     getNewCollections,
 } from "services/collectionApi";
+import type { Collection } from "models/collection/typings";
 
 /**
  * @loadNewCollectionList action get list of collection from service

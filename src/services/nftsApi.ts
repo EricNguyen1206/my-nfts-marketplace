@@ -1,5 +1,7 @@
+import { NFT, NFTCollection, TransactionResultWithId } from "@thirdweb-dev/sdk";
+
 // INTERNAL
-import { NftListing, NftMetadata } from "models/nft/typings";
+import type { MintableNftMetadata, NftListing } from "models/nft/typings";
 
 /**
  * @getNftByTokenId get nft by tokenId from marketplace
@@ -45,15 +47,29 @@ const getListNftByAddress = async (
     }
 };
 
+/**
+ * @postNewNft mint NFT to collection contract
+ * @param {NFTCollection} contract
+ * @param {string} walletAddress
+ * @param {MintableNftMetadata} data
+ * @return {Promise<TransactionResultWithId<NFT>>}
+ */
 const postNewNft = async (
-    contract: any,
+    contract: NFTCollection,
     walletAddress: string,
-    data: NftMetadata
-) => {
+    data: MintableNftMetadata
+): Promise<TransactionResultWithId<NFT>> => {
     try {
-        const result = await contract.mintTo(walletAddress, data);
+        console.log("walletAddress", walletAddress);
+        const result = await contract.mintTo(walletAddress, {
+            name: data.name,
+            description: data.description,
+            image: data.image,
+        });
         return result;
     } catch (e: any) {
+        console.error("error occurred!", e);
+
         throw new Error("Mint Nft Failed!", e);
     }
 };

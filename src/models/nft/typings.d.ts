@@ -1,12 +1,19 @@
+export interface MintableNftMetadata {
+    name: string;
+    description: string;
+    image: File;
+    attributes: { [x: string]: unknown }[];
+}
+
 export interface NftMetadata {
     name: string;
     description: string;
     image: string;
-    id: string;
-    uri: string;
+    id?: string;
+    uri?: string;
     attributes: Array<NftAttributes>;
-    external_url: string;
-    background_color: string;
+    external_url?: string;
+    background_color?: string;
 }
 
 export interface Nft {

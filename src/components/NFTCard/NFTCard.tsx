@@ -1,6 +1,7 @@
 import React from "react";
 import {
     Card,
+    CardActions,
     CardContent,
     CardMedia,
     Typography,
@@ -9,14 +10,15 @@ import {
 
 // INTERNAL
 import "./NFTCard.scss";
-import { NftListing } from "models/nft/typings";
+import { NftMetadata } from "models/nft/typings";
 import { stringMinify } from "utils/stringMinify";
 
 export type NFTCartProps = {
-    nft: NftListing;
+    nft: NftMetadata;
+    action?: JSX.Element;
 };
 
-const NFTCard = ({ nft }: NFTCartProps) => {
+const NFTCard = ({ nft, action }: NFTCartProps) => {
     const theme = useTheme();
     return (
         <Card
@@ -27,26 +29,19 @@ const NFTCard = ({ nft }: NFTCartProps) => {
             }}
             className="nft-list__card"
         >
-            <div
-                style={{
-                    overflow: "hidden",
-                    width: "100%",
+            <CardMedia
+                sx={{
+                    height: 278,
+                    cursor: "pointer",
+                    transition: "ease .5s",
+                    "&:hover": {
+                        transform: "scale(1.1) translateY(-4%) !important",
+                    },
                 }}
-            >
-                <CardMedia
-                    sx={{
-                        height: 278,
-                        cursor: "pointer",
-                        transition: "ease .5s",
-                        "&:hover": {
-                            scale: "1.1 !important",
-                        },
-                    }}
-                    image={nft.asset.image}
-                    title={nft.asset.name}
-                    className="nft-list__card--img"
-                />
-            </div>
+                image={nft.image}
+                title={nft.name}
+                className="nft-list__card--img"
+            />
             <CardContent sx={{ paddingBottom: "8px" }}>
                 <Typography
                     gutterBottom
@@ -57,7 +52,7 @@ const NFTCard = ({ nft }: NFTCartProps) => {
                         fontWeight: 600,
                     }}
                 >
-                    {nft.asset.name}
+                    {nft.name}
                 </Typography>
                 <Typography
                     variant="body2"
@@ -68,9 +63,10 @@ const NFTCard = ({ nft }: NFTCartProps) => {
                         fontWeight: 600,
                     }}
                 >
-                    {stringMinify(nft.asset.description, 40)}
+                    {stringMinify(nft.description, 40)}
                 </Typography>
             </CardContent>
+            {action && <CardActions sx={{ padding: 0 }}>{action}</CardActions>}
         </Card>
     );
 };

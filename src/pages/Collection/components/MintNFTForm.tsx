@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { Add, Delete } from "@mui/icons-material";
 import ImageUploading from "react-images-uploading";
+import { Web3Button } from "@thirdweb-dev/react";
 
 // INTERNAL
 import useMintNFTForm from "../hooks/useMintNFTForm";
@@ -32,11 +33,13 @@ const MintNFTForm = (props: Props) => {
         name,
         theme,
         images,
+        collection,
         openDrawer,
         attributes,
         description,
         setAtb,
         setName,
+        handleSubmit,
         handleAddAtb,
         toggleDrawer,
         setDescription,
@@ -259,24 +262,21 @@ const MintNFTForm = (props: Props) => {
                                 }
                             >
                                 <ListItemText
-                                    primary={item.value}
-                                    secondary={item.trait_type}
+                                    primary={item.value + ""}
+                                    secondary={item.trait_type + ""}
                                 />
                             </ListItem>
                         ))}
                     </List>
                     <Divider />
-                    <Button
-                        variant="contained"
-                        sx={{
-                            width: "100%",
-                            position: "absolute",
-                            bottom: "16px",
-                            left: 0,
-                        }}
-                    >
-                        Mint NFT
-                    </Button>
+                    {collection.data && collection.data.fee_recipient && (
+                        <Web3Button
+                            contractAddress={collection.data.contractAddress}
+                            action={handleSubmit}
+                        >
+                            Mint NFT
+                        </Web3Button>
+                    )}
                 </FormControl>
             </Container>
         </Drawer>

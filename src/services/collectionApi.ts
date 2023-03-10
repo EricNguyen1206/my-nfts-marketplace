@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { Marketplace, ThirdwebSDK } from "@thirdweb-dev/sdk";
+import { Marketplace, NFTCollection, ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { child, ref, query, get, set, push } from "firebase/database";
 // import { equalTo } from "@firebase/database"; // function to query data from firebase
 
@@ -29,14 +29,20 @@ const getNewCollections = async (): Promise<Collection[]> => {
 
 /**
  * @getCollection return Contract metadata
- * @param {any} contract the contract of collection from address and sdk
+ * @param {NFTCollection} contract the contract of collection from address and sdk
  * @return {Promise<Collection>}
  */
-export const getCollection = async (contract: any): Promise<Collection> => {
+const getCollectionMetadata = async (
+    contract: NFTCollection
+): Promise<Collection> => {
     try {
         if (contract) {
-            const data = contract.metadata.get();
-            return data;
+            const data = await contract.metadata.get();
+            const res: Collection = {
+                ...data,
+                contractAddress: contract.getAddress(),
+            };
+            return res;
         } else {
             throw new Error("Invalid contract!");
         }
@@ -46,17 +52,17 @@ export const getCollection = async (contract: any): Promise<Collection> => {
 };
 
 /**
- * @getNftListByContract return list of  NFT that contract was listing for sale from collection address
- * @param {Marketplace | undefined} contract the marketplace contract from sdk
+ * @getNftActiveListByContract return list of  NFT that contract was listing for sale from collection address
+ * @param {Marketplace} contract the marketplace contract from sdk
  * @param {string} address contract address of collection
  * @return {Promise<NftListing[]>}
  */
-const getNftListByContract = async (
-    contract: Marketplace | undefined,
+const getNftActiveListByContract = async (
+    contract: Marketplace,
     address: string
 ): Promise<NftListing[]> => {
     try {
-        const data: any = await contract?.getActiveListings({
+        const data: any = await contract.getActiveListings({
             tokenContract: address,
         });
         if (data) {
@@ -66,6 +72,21 @@ const getNftListByContract = async (
         }
     } catch (e) {
         throw new Error("Invalid contract collection!");
+    }
+};
+/**
+ *
+ * @param {NFTCollection} collection
+ * @return {Promise<any>}
+ */
+const getNftListOfCollection = async (
+    collection: NFTCollection
+): Promise<any> => {
+    try {
+        const data: any = await collection.getAll();
+        return data;
+    } catch (e: any) {
+        throw new Error("get NFT list failed", e);
     }
 };
 
@@ -188,8 +209,10 @@ const postNewCollection = async (
 };
 
 export {
+    getCollectionMetadata,
     getNewCollections,
-    getNftListByContract,
+    getNftActiveListByContract,
+    getNftListOfCollection,
     getCollectionNftList,
     getCollectionListByAddress,
     getCollectionListByCategory,

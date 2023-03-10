@@ -8,7 +8,7 @@ import { CollectionModel } from "models/collection/typings";
 import type { NftListing } from "models/nft/typings";
 import { useHandleBuy } from "hooks/useHandleBuy";
 import { useAppDispatch } from "hooks/useStoreHooks";
-import { loadNftListByContract } from "models/collection";
+import { readActiveNftListDataByMarketplace } from "models/collection";
 import useMarketplace from "hooks/useMarketplace";
 
 type Props = {
@@ -24,7 +24,7 @@ const CollectionContent = ({ param, collection }: Props) => {
     const handleBuyNftInCollection = (tokenId: string) => {
         handleBuy(tokenId, () =>
             dispatch(
-                loadNftListByContract({
+                readActiveNftListDataByMarketplace({
                     contract: marketplace,
                     address: param.address + "",
                 })

@@ -4,6 +4,7 @@ import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { Provider } from "react-redux";
 
 // INTERNAL
+import "styles/global.scss";
 import App from "./App";
 import store from "./app/store";
 

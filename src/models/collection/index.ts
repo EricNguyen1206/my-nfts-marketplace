@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 // INTERNAL
-import { loadCollectionData, loadNftListByContract } from "./actions";
+import {
+    createNewNftOfCollection,
+    readCollectionData,
+    readNftListDataByCollection,
+    readActiveNftListDataByMarketplace,
+} from "./actions";
 import reducers, { initialState } from "./reducers";
 
 const collectionSlice = createSlice({
@@ -10,30 +16,71 @@ const collectionSlice = createSlice({
     reducers,
     extraReducers: (builder) => {
         builder
-            .addCase(loadCollectionData.pending, (state, action) => {
+            .addCase(readCollectionData.pending, (state, action) => {
                 state.pending = true;
             })
-            .addCase(loadCollectionData.fulfilled, (state, action) => {
+            .addCase(readCollectionData.fulfilled, (state, action) => {
                 state.pending = false;
-                state.data = action.payload;
+                state.data = { ...state.data, ...action.payload };
             })
-            .addCase(loadCollectionData.rejected, (state, action) => {
+            .addCase(readCollectionData.rejected, (state, action) => {
                 state.pending = false;
                 state.error = true;
             })
-            .addCase(loadNftListByContract.pending, (state, action) => {
+            .addCase(
+                readActiveNftListDataByMarketplace.pending,
+                (state, action) => {
+                    state.pending = true;
+                }
+            )
+            .addCase(
+                readActiveNftListDataByMarketplace.fulfilled,
+                (state, action) => {
+                    state.pending = false;
+                    state.nftList = action.payload;
+                }
+            )
+            .addCase(
+                readActiveNftListDataByMarketplace.rejected,
+                (state, action) => {
+                    state.pending = false;
+                    state.error = true;
+                }
+            )
+            .addCase(readNftListDataByCollection.pending, (state, action) => {
                 state.pending = true;
             })
-            .addCase(loadNftListByContract.fulfilled, (state, action) => {
+            .addCase(readNftListDataByCollection.fulfilled, (state, action) => {
+                console.log("action.payload", action.payload);
                 state.pending = false;
                 state.nftList = action.payload;
             })
-            .addCase(loadNftListByContract.rejected, (state, action) => {
+            .addCase(readNftListDataByCollection.rejected, (state, action) => {
+                state.pending = false;
+                state.error = true;
+            })
+            .addCase(createNewNftOfCollection.pending, (state, action) => {
+                toast.loading("Transaction processing...", { duration: 1500 });
+                state.pending = true;
+            })
+            .addCase(createNewNftOfCollection.fulfilled, (state, action) => {
+                console.log("action.payload", action.payload);
+                toast.success("Transaction success!", { duration: 1500 });
+                state.pending = false;
+            })
+            .addCase(createNewNftOfCollection.rejected, (state, action) => {
+                toast.error("Error occurred while minting your NFT 😥", {
+                    duration: 1500,
+                });
                 state.pending = false;
                 state.error = true;
             });
     },
 });
 
-export { loadCollectionData, loadNftListByContract };
+export {
+    readCollectionData,
+    readActiveNftListDataByMarketplace,
+    createNewNftOfCollection,
+};
 export default collectionSlice.reducer;

@@ -6,6 +6,7 @@ import MintNFTForm from "./MintNFTForm";
 
 const MintNftButton = () => {
     const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+
     return (
         <React.Fragment>
             <MintNFTForm

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // INTERNAL
-import { loadNFTData } from "./actions";
+import { readNFTData } from "./actions";
 import reducers, { initialState } from "./reducers";
 
 const nftSlice = createSlice({
@@ -10,21 +10,21 @@ const nftSlice = createSlice({
     reducers,
     extraReducers: (builder) => {
         builder
-            .addCase(loadNFTData.pending, (state, action) => {
+            .addCase(readNFTData.pending, (state, action) => {
                 state.pending = true;
             })
-            .addCase(loadNFTData.fulfilled, (state, action) => {
+            .addCase(readNFTData.fulfilled, (state, action) => {
                 state.pending = false;
                 if (action.payload) {
                     state.data = action.payload;
                 }
             })
-            .addCase(loadNFTData.rejected, (state, action) => {
+            .addCase(readNFTData.rejected, (state, action) => {
                 state.pending = false;
                 state.error = true;
             });
     },
 });
 
-export { loadNFTData };
+export { readNFTData };
 export default nftSlice.reducer;

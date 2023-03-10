@@ -1,21 +1,76 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // INTERNAL
-import { Collection } from "./typings";
-import { getCollection, getNftListByContract } from "services/collectionApi";
+import {
+    getCollectionMetadata,
+    getNftActiveListByContract,
+    getNftListOfCollection,
+} from "services/collectionApi";
+import { postNewNft } from "services/nftsApi";
+import type { Collection } from "./typings";
+import type { MintableNftMetadata } from "models/nft/typings";
+import { Marketplace, NFTCollection } from "@thirdweb-dev/sdk";
 
-export const loadCollectionData = createAsyncThunk(
-    "collection/loadCollectionData",
-    async (contract: any) => {
-        const data: Collection = await getCollection(contract);
+/**
+ * @param {NFTCollection} contract
+ */
+const readCollectionData = createAsyncThunk(
+    "collection/readCollectionData",
+    async (contract: NFTCollection) => {
+        const data: Collection = await getCollectionMetadata(contract);
         return data;
     }
 );
 
-export const loadNftListByContract = createAsyncThunk(
-    "collection/loadNftListByContract",
-    async ({ contract, address }: { contract: any; address: string }) => {
-        const nftList = await getNftListByContract(contract, address);
+const readActiveNftListDataByMarketplace = createAsyncThunk(
+    "collection/readActiveNftListDataByMarketplace",
+    async ({
+        contract,
+        address,
+    }: {
+        contract: Marketplace;
+        address: string;
+    }) => {
+        const nftList = await getNftActiveListByContract(contract, address);
         return nftList;
     }
 );
+
+const readNftListDataByCollection = createAsyncThunk(
+    "collection/readNftListDataByCollection",
+    async ({ collection }: { collection: NFTCollection }) => {
+        const nftList = await getNftListOfCollection(collection);
+        return nftList;
+    }
+);
+
+/**
+ * @createNewNftOfCollection mint nft of collection
+ * @return {void}
+ */
+const createNewNftOfCollection = createAsyncThunk(
+    "nft/createNewNftOfCollection",
+    async ({
+        contract,
+        walletAddress,
+        data,
+    }: {
+        contract: any;
+        walletAddress: string;
+        data: MintableNftMetadata;
+    }) => {
+        try {
+            const result = await postNewNft(contract, walletAddress, data);
+            return result;
+        } catch (e: any) {
+            throw new Error("Mint NFT action failed 😥", e);
+        }
+    }
+);
+
+export {
+    readCollectionData,
+    readActiveNftListDataByMarketplace,
+    readNftListDataByCollection,
+    createNewNftOfCollection,
+};

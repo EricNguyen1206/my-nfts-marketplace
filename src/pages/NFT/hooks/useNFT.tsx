@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 // INTERNAL
 import useMarketplace from "hooks/useMarketplace";
 import { useAppDispatch, useAppSelector } from "hooks/useStoreHooks";
-import { loadNFTData } from "models/nft";
+import { readNFTData } from "models/nft";
 import { Model } from "models/typings";
 import { NftListing } from "models/nft/typings";
 import { useHandleBuy } from "hooks/useHandleBuy";
@@ -38,7 +38,7 @@ export default function useNFT() {
 
     useEffect(() => {
         if (tokenId && marketplace) {
-            dispatch(loadNFTData({ contract: marketplace, tokenId }));
+            dispatch(readNFTData({ contract: marketplace, tokenId }));
         } else {
             toast.error("NFT token ID is not exit!");
         }

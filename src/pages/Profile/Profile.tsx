@@ -184,7 +184,7 @@ const Profile = () => {
                     </Grid>
                     {nftList.map((nft: NftListing) => (
                         <Grid item lg={3} md={4} sm={6} key={nft.id}>
-                            <NFTCard nft={nft} />
+                            <NFTCard nft={nft.asset} />
                         </Grid>
                     ))}
                 </Grid>

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
 
 // INTERNAL
-import "./App.scss";
 import { publicRoutes, userRoutes } from "./routes";
 import MainLayout from "./layouts/MainLayout";
 import useAppThemes from "./hooks/useAppThemes";
