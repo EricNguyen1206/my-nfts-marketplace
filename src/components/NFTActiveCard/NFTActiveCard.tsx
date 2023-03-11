@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Button, Stack } from "@mui/material";
 
 // INTERNAL
-// import "./NFTActiveCard.scss";
 import { NftListing } from "models/nft/typings";
 import NFTCard from "components/NFTCard";
 

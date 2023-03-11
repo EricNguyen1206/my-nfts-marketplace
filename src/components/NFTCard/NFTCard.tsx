@@ -38,7 +38,10 @@ const NFTCard = ({ nft, action }: NFTCartProps) => {
                         transform: "scale(1.1) translateY(-4%) !important",
                     },
                 }}
-                image={nft.image}
+                image={
+                    nft.image ||
+                    "https://mekalegends.com/opensea/images/469.png"
+                }
                 title={nft.name}
                 className="nft-list__card--img"
             />

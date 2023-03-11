@@ -15,7 +15,11 @@ const Collection = () => {
             <Container className="collection">
                 <CollectionOverview user={user} collection={collection} />
                 <Divider light />
-                <CollectionContent param={param} collection={collection} />
+                <CollectionContent
+                    param={param}
+                    user={user}
+                    collection={collection}
+                />
             </Container>
         </React.Fragment>
     );

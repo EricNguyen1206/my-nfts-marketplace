@@ -6,7 +6,7 @@ import {
     getNftActiveListByContract,
     getNftListOfCollection,
 } from "services/collectionApi";
-import { postNewNft } from "services/nftsApi";
+import { postNewNft, putDirectListing } from "services/nftsApi";
 import type { Collection } from "./typings";
 import type { MintableNftMetadata } from "models/nft/typings";
 import { Marketplace, NFTCollection } from "@thirdweb-dev/sdk";
@@ -49,7 +49,7 @@ const readNftListDataByCollection = createAsyncThunk(
  * @return {void}
  */
 const createNewNftOfCollection = createAsyncThunk(
-    "nft/createNewNftOfCollection",
+    "collection/createNewNftOfCollection",
     async ({
         contract,
         walletAddress,
@@ -68,9 +68,37 @@ const createNewNftOfCollection = createAsyncThunk(
     }
 );
 
+const updateNftInCollectionToListing = createAsyncThunk(
+    "collection/updateNftInCollectionToListing",
+    async ({
+        contract,
+        assetContractAddress,
+        walletAddress,
+        price,
+    }: {
+        contract: Marketplace;
+        assetContractAddress: string;
+        walletAddress: string;
+        price: number;
+    }) => {
+        try {
+            const result = await putDirectListing(
+                contract,
+                assetContractAddress,
+                walletAddress,
+                price
+            );
+            console.log("List NFT result", result);
+        } catch (e: any) {
+            throw new Error("List NFT failed 😥", e);
+        }
+    }
+);
+
 export {
     readCollectionData,
     readActiveNftListDataByMarketplace,
     readNftListDataByCollection,
     createNewNftOfCollection,
+    updateNftInCollectionToListing,
 };

@@ -7,6 +7,7 @@ import {
     readCollectionData,
     readNftListDataByCollection,
     readActiveNftListDataByMarketplace,
+    updateNftInCollectionToListing,
 } from "./actions";
 import reducers, { initialState } from "./reducers";
 
@@ -51,7 +52,6 @@ const collectionSlice = createSlice({
                 state.pending = true;
             })
             .addCase(readNftListDataByCollection.fulfilled, (state, action) => {
-                console.log("action.payload", action.payload);
                 state.pending = false;
                 state.nftList = action.payload;
             })
@@ -74,6 +74,17 @@ const collectionSlice = createSlice({
                 });
                 state.pending = false;
                 state.error = true;
+            })
+            .addCase(updateNftInCollectionToListing.pending, (state, _) => {
+                state.pending = true;
+            })
+            .addCase(updateNftInCollectionToListing.fulfilled, (state, _) => {
+                toast.success("Transaction success!", { duration: 1500 });
+                state.pending = false;
+            })
+            .addCase(updateNftInCollectionToListing.rejected, (state, _) => {
+                state.pending = false;
+                state.error = true;
             });
     },
 });
@@ -81,6 +92,8 @@ const collectionSlice = createSlice({
 export {
     readCollectionData,
     readActiveNftListDataByMarketplace,
+    readNftListDataByCollection,
     createNewNftOfCollection,
+    updateNftInCollectionToListing,
 };
 export default collectionSlice.reducer;

@@ -15,7 +15,6 @@ type Props = {
 
 const CollectionOverview = ({ collection, user }: Props) => {
     const theme = useTheme();
-    console.log("collection", collection);
     return (
         <Grid container className="collection__overview" spacing={2}>
             <Grid item lg={2} md={3} xs={12} className="collection__img">

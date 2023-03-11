@@ -1,4 +1,10 @@
-import { NFT, NFTCollection, TransactionResultWithId } from "@thirdweb-dev/sdk";
+import {
+    Marketplace,
+    NewDirectListing,
+    NFT,
+    NFTCollection,
+    TransactionResultWithId,
+} from "@thirdweb-dev/sdk";
 
 // INTERNAL
 import type { MintableNftMetadata, NftListing } from "models/nft/typings";
@@ -60,7 +66,6 @@ const postNewNft = async (
     data: MintableNftMetadata
 ): Promise<TransactionResultWithId<NFT>> => {
     try {
-        console.log("walletAddress", walletAddress);
         const result = await contract.mintTo(walletAddress, {
             name: data.name,
             description: data.description,
@@ -68,10 +73,42 @@ const postNewNft = async (
         });
         return result;
     } catch (e: any) {
-        console.error("error occurred!", e);
-
         throw new Error("Mint Nft Failed!", e);
     }
 };
 
-export { getNftByTokenId, getListNftByAddress, postNewNft };
+const putDirectListing = async (
+    contract: Marketplace,
+    assetContractAddress: string,
+    walletAddress: string,
+    price: number
+) => {
+    try {
+        // Data of the listing you want to create
+        const listing: NewDirectListing = {
+            // address of the NFT contract the asset you want to list is on
+            assetContractAddress,
+            // token ID of the asset you want to list
+            tokenId: (await contract.getTotalCount()) + "",
+            // when should the listing open up for offers
+            startTimestamp: new Date(),
+            // how long the listing will be open for
+            listingDurationInSeconds: 0,
+            // how many of the asset you want to list
+            quantity: 1,
+            // address of the currency contract that will be used to pay for the listing
+            currencyContractAddress: walletAddress,
+            // how much the asset will be sold for
+            buyoutPricePerToken: price + "",
+        };
+        console.log("listing", listing);
+        console.log("contract", contract.metadata);
+        const tx = await contract.direct.createListing(listing);
+        return tx;
+    } catch (e: any) {
+        console.log("e", e);
+        throw new Error("Listing Request Error", e);
+    }
+};
+
+export { getNftByTokenId, getListNftByAddress, postNewNft, putDirectListing };

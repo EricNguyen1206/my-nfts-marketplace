@@ -49,20 +49,19 @@ const useCollection = () => {
             if (contract) {
                 dispatch(readCollectionData(contract));
             }
-            if (
-                user.data &&
-                collection.data &&
-                contract &&
-                user.data.address === collection.data.fee_recipient
-            ) {
-                dispatch(readNftListDataByCollection({ collection: contract }));
-            } else {
-                dispatch(
-                    readActiveNftListDataByMarketplace({
-                        contract: marketplace,
-                        address: param.address + "",
-                    })
-                );
+            if (user.data && collection.data && contract && marketplace) {
+                if (user.data.address === collection.data.fee_recipient) {
+                    dispatch(
+                        readNftListDataByCollection({ collection: contract })
+                    );
+                } else {
+                    dispatch(
+                        readActiveNftListDataByMarketplace({
+                            contract: marketplace,
+                            address: param.address + "",
+                        })
+                    );
+                }
             }
         })();
     }, [marketplace, user.data]);
