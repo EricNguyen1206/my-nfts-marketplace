@@ -64,7 +64,6 @@ const collectionSlice = createSlice({
                 state.pending = true;
             })
             .addCase(createNewNftOfCollection.fulfilled, (state, action) => {
-                console.log("action.payload", action.payload);
                 toast.success("Transaction success!", { duration: 1500 });
                 state.pending = false;
             })

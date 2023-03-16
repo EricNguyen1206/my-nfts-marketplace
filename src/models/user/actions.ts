@@ -44,8 +44,7 @@ const createNewCollection = createAsyncThunk(
                     ),
                     {
                         loading: "Transaction processing...",
-                        success: (collection) => {
-                            console.log("collection", collection);
+                        success: () => {
                             return "Transaction success!";
                         },
                         error: "Error when deploying your contract 😥",

@@ -82,13 +82,12 @@ const updateNftInCollectionToListing = createAsyncThunk(
         price: number;
     }) => {
         try {
-            const result = await putDirectListing(
+            putDirectListing(
                 contract,
                 assetContractAddress,
                 walletAddress,
                 price
             );
-            console.log("List NFT result", result);
         } catch (e: any) {
             throw new Error("List NFT failed 😥", e);
         }

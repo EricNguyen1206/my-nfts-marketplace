@@ -46,8 +46,9 @@ const getListNftByAddress = async (
                 seller: address,
             });
             return data;
+        } else {
+            return [];
         }
-        throw new Error("Contract invalid!");
     } catch (e: any) {
         throw new Error("Get resource failed", e);
     }
@@ -101,12 +102,9 @@ const putDirectListing = async (
             // how much the asset will be sold for
             buyoutPricePerToken: price + "",
         };
-        console.log("listing", listing);
-        console.log("contract", contract.metadata);
         const tx = await contract.direct.createListing(listing);
         return tx;
     } catch (e: any) {
-        console.log("e", e);
         throw new Error("Listing Request Error", e);
     }
 };

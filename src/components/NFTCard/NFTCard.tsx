@@ -4,6 +4,7 @@ import {
     CardActions,
     CardContent,
     CardMedia,
+    Skeleton,
     Typography,
     useTheme,
 } from "@mui/material";
@@ -29,46 +30,54 @@ const NFTCard = ({ nft, action }: NFTCartProps) => {
             }}
             className="nft-list__card"
         >
-            <CardMedia
-                sx={{
-                    height: 278,
-                    cursor: "pointer",
-                    transition: "ease .5s",
-                    "&:hover": {
-                        transform: "scale(1.1) translateY(-4%) !important",
-                    },
-                }}
-                image={
-                    nft.image ||
-                    "https://mekalegends.com/opensea/images/469.png"
-                }
-                title={nft.name}
-                className="nft-list__card--img"
-            />
-            <CardContent sx={{ paddingBottom: "8px" }}>
-                <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
+            {!nft ? (
+                <Skeleton variant="rectangular" width={278} height={278} />
+            ) : (
+                <CardMedia
                     sx={{
-                        fontSize: ".8rem",
-                        fontWeight: 600,
+                        height: 278,
+                        cursor: "pointer",
+                        transition: "ease .5s",
+                        "&:hover": {
+                            transform: "scale(1.1) translateY(-4%) !important",
+                        },
                     }}
-                >
-                    {nft.name}
-                </Typography>
-                <Typography
-                    variant="body2"
-                    component="span"
-                    color="text.primary"
-                    sx={{
-                        fontSize: "1rem",
-                        fontWeight: 600,
-                    }}
-                >
-                    {stringMinify(nft.description, 40)}
-                </Typography>
-            </CardContent>
+                    image={
+                        nft.image ||
+                        "https://mekalegends.com/opensea/images/469.png"
+                    }
+                    title={nft.name}
+                    className="nft-list__card--img"
+                />
+            )}
+            {!nft ? (
+                <Skeleton />
+            ) : (
+                <CardContent sx={{ paddingBottom: "8px" }}>
+                    <Typography
+                        gutterBottom
+                        variant="h5"
+                        component="div"
+                        sx={{
+                            fontSize: ".8rem",
+                            fontWeight: 600,
+                        }}
+                    >
+                        {nft.name}
+                    </Typography>
+                    <Typography
+                        variant="body2"
+                        component="span"
+                        color="text.primary"
+                        sx={{
+                            fontSize: "1rem",
+                            fontWeight: 600,
+                        }}
+                    >
+                        {stringMinify(nft.description, 40)}
+                    </Typography>
+                </CardContent>
+            )}
             {action && <CardActions sx={{ padding: 0 }}>{action}</CardActions>}
         </Card>
     );

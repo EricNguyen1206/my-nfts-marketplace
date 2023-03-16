@@ -30,14 +30,16 @@ const useCollection = () => {
     );
 
     const handleBuyNftInCollection = (tokenId: string) => {
-        handleBuy(tokenId, () =>
-            dispatch(
-                readActiveNftListDataByMarketplace({
-                    contract: marketplace,
-                    address: param.address + "",
-                })
-            )
-        );
+        handleBuy(tokenId, () => {
+            if (marketplace) {
+                dispatch(
+                    readActiveNftListDataByMarketplace({
+                        contract: marketplace,
+                        address: param.address + "",
+                    })
+                );
+            }
+        });
     };
 
     useEffect(() => {
@@ -49,8 +51,20 @@ const useCollection = () => {
             if (contract) {
                 dispatch(readCollectionData(contract));
             }
-            if (user.data && collection.data && contract && marketplace) {
-                if (user.data.address === collection.data.fee_recipient) {
+        })();
+    }, [marketplace, user.data]);
+
+    useEffect(() => {
+        (async () => {
+            const contract = await sdk?.getContract(
+                param.address + "",
+                "nft-collection"
+            );
+            if (collection.data && contract && marketplace) {
+                if (
+                    user.data &&
+                    user.data.address === collection.data.fee_recipient
+                ) {
                     dispatch(
                         readNftListDataByCollection({ collection: contract })
                     );
@@ -64,7 +78,7 @@ const useCollection = () => {
                 }
             }
         })();
-    }, [marketplace, user.data]);
+    }, [collection.data]);
 
     return {
         user,

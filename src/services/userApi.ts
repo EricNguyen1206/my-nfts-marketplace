@@ -4,21 +4,21 @@ import { ref, query, get, orderByChild } from "firebase/database";
 
 // INTERNAL
 import { firebaseDatabase } from "utils/firebase";
-import { User } from "models/user/typings";
+// import { User } from "models/user/typings";
 
 /**
  * @getUserData get User data from firebase
  * @param {string} address wallet address of user
- * @return {Promise<User>}
+ * @return {Promise<any>}
  */
-const getUserData = async (address: string): Promise<User> => {
+const getUserData = async (address: string): Promise<any> => {
     try {
         const dbRef = ref(firebaseDatabase, `users`);
         const snapshot = await get(
             query(dbRef, orderByChild("address"), equalTo(address))
         );
         if (snapshot) {
-            return snapshot.val().findLast((item: any) => item.address);
+            return Object.values(snapshot.val())[0];
         }
         throw new Error("Get resource failed!");
     } catch (e: any) {

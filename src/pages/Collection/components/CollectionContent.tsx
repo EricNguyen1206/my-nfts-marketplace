@@ -27,14 +27,16 @@ const CollectionContent = ({ param, user, collection }: Props) => {
     const marketplace = useMarketplace();
 
     const handleBuyNftInCollection = (tokenId: string) => {
-        handleBuy(tokenId, () =>
-            dispatch(
-                readActiveNftListDataByMarketplace({
-                    contract: marketplace,
-                    address: param.address + "",
-                })
-            )
-        );
+        handleBuy(tokenId, () => {
+            if (marketplace) {
+                dispatch(
+                    readActiveNftListDataByMarketplace({
+                        contract: marketplace,
+                        address: param.address + "",
+                    })
+                );
+            }
+        });
     };
 
     const checkOwner = () => {
@@ -52,8 +54,14 @@ const CollectionContent = ({ param, user, collection }: Props) => {
             ) : (
                 <Grid container spacing={3} className="">
                     {checkOwner()
-                        ? collection.nftList.map((nft: Nft, index) => (
-                              <Grid item lg={3} md={4} xs={6} key={index}>
+                        ? collection.nftList?.map((nft: Nft, index) => (
+                              <Grid
+                                  item
+                                  lg={3}
+                                  md={4}
+                                  xs={6}
+                                  key={nft.metadata?.id || index}
+                              >
                                   {nft.owner === user.data?.address ? (
                                       <ListableNFTCard
                                           nft={nft}
@@ -64,8 +72,15 @@ const CollectionContent = ({ param, user, collection }: Props) => {
                                   )}
                               </Grid>
                           ))
-                        : collection.nftList.map((nft: NftListing) => (
-                              <Grid item lg={3} md={4} xs={6} key={nft.id}>
+                        : collection.nftList?.map((nft: NftListing) => (
+                              <Grid
+                                  item
+                                  lg={3}
+                                  md={4}
+                                  xs={6}
+                                  key={nft.id}
+                                  sx={{ margin: "auto" }}
+                              >
                                   <NFTActiveCard
                                       nft={nft}
                                       handleBuyNftInCollection={

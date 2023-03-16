@@ -1,14 +1,13 @@
 import { useContract } from "@thirdweb-dev/react";
+import { Marketplace } from "@thirdweb-dev/sdk";
 
 /**
  * function return contract marketplace
- * @return {any} marketplace contract
+ * @return { Marketplace | undefined} marketplace contract
  */
-function useMarketplace(): any {
-    const { contract } = useContract(
-        "0xF1f1a1f12061e6Ca40548cDdAF9E870B86D7D22B",
-        "marketplace"
-    );
+function useMarketplace(): Marketplace | undefined {
+    const contractAddress = process.env.REACT_APP_MARKETPLACE!!;
+    const { contract } = useContract(contractAddress, "marketplace");
     return contract;
 }
 

@@ -108,7 +108,10 @@ const Header = () => {
                         <Link to="/profile">
                             <Avatar
                                 alt={`${user.data.name}`}
-                                src={`${user.data.avatar}`}
+                                src={`${
+                                    user.data.avatar ||
+                                    "https://gateway.ipfscdn.io/ipfs/Qmed5ooSfneZgJKsKFrfBrYN3RcZ4wuJcnASjs85qwirq1/Alano%20Devine%20%23469.png"
+                                }`}
                             />
                         </Link>
                     )}

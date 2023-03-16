@@ -42,7 +42,7 @@ const GuideSection = () => {
         <section className="guide">
             <Container maxWidth="lg">
                 <Grid container spacing={3}>
-                    <Grid item lg={12} className="mb-4">
+                    <Grid item xs={12} className="mb-4">
                         <h3 className="guide__title">
                             Create and sell your NFTs
                         </h3>

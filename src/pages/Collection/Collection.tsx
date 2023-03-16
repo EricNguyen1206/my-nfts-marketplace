@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Divider } from "@mui/material";
+import { Container } from "@mui/material";
 
 // INTERNAL
 import "./styles/Collection.scss";
@@ -14,7 +14,6 @@ const Collection = () => {
         <React.Fragment>
             <Container className="collection">
                 <CollectionOverview user={user} collection={collection} />
-                <Divider light />
                 <CollectionContent
                     param={param}
                     user={user}

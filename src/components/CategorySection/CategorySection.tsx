@@ -22,7 +22,7 @@ const CategorySection = () => {
         <section className="top-volume">
             <Container>
                 <Grid container spacing={2}>
-                    <Grid item lg={12}>
+                    <Grid item xs={12}>
                         <div className="top-volume__top">
                             <h3>Category</h3>
                             <span>

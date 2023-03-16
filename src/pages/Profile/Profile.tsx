@@ -14,7 +14,7 @@ import AddIcon from "@mui/icons-material/Add";
 import "./Profile.scss";
 import bg from "assets/images/bg.jpg";
 import CollectionCard from "components/CollectionCard";
-import { NftListing } from "models/nft/typings";
+import { Nft } from "models/nft/typings";
 import DeployCollectionForm from "components/DeployCollectionForm";
 import useProfile from "./hooks/useProfile";
 import NFTCard from "components/NFTCard";
@@ -182,9 +182,9 @@ const Profile = () => {
                             Collected
                         </Typography>
                     </Grid>
-                    {nftList.map((nft: NftListing) => (
-                        <Grid item lg={3} md={4} sm={6} key={nft.id}>
-                            <NFTCard nft={nft.asset} />
+                    {nftList.map((nft: Nft) => (
+                        <Grid item lg={3} md={4} sm={6} key={nft.metadata.name}>
+                            <NFTCard nft={nft.metadata} />
                         </Grid>
                     ))}
                 </Grid>

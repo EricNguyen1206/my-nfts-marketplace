@@ -21,7 +21,6 @@ const Register = () => {
         if (username && email && password && password === confirm) {
             signup({ username, email, password })
                 .then((res) => {
-                    console.log("res", res);
                     toast.success("Register successfully. Let's shopping!");
                 })
                 .catch((err) => {

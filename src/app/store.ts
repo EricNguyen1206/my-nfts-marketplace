@@ -13,7 +13,10 @@ const store = configureStore({
         nft: nftReducer,
         user: userReducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false,
+        }),
 });
 
 export default store;

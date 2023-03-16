@@ -1,5 +1,12 @@
 import React from "react";
-import { Grid, Stack, Skeleton, Typography, useTheme } from "@mui/material";
+import {
+    Grid,
+    Stack,
+    Skeleton,
+    Typography,
+    useTheme,
+    Divider,
+} from "@mui/material";
 
 // INTERNAL
 import { CollectionModel } from "models/collection/typings";
@@ -29,19 +36,19 @@ const CollectionOverview = ({ collection, user }: Props) => {
                         xs: "space-between",
                         md: "flex-start",
                     }}
-                    sx={{ width: "100%" }}
+                    sx={{ width: "100%", height: "fit-content" }}
                 >
-                    {collection.pending ? (
+                    {!collection.pending && collection.data ? (
+                        <img
+                            src={collection.data.image}
+                            alt="collection image"
+                            width={168}
+                        />
+                    ) : (
                         <Skeleton
                             variant="rectangular"
                             width={168}
                             height={168}
-                        />
-                    ) : (
-                        <img
-                            src={collection.data?.image}
-                            alt="collection image"
-                            width={168}
                         />
                     )}
                     {user.data?.address === collection.data?.fee_recipient && (
@@ -174,7 +181,7 @@ const CollectionOverview = ({ collection, user }: Props) => {
                                         color: theme.palette.text.primary,
                                     }}
                                 >
-                                    Art
+                                    {collection.data?.category || "Art"}
                                 </Typography>
                                 <Typography
                                     variant="subtitle1"
@@ -188,6 +195,8 @@ const CollectionOverview = ({ collection, user }: Props) => {
                         </Grid>
                     </React.Fragment>
                 )}
+
+                <Divider light />
             </Grid>
         </Grid>
     );

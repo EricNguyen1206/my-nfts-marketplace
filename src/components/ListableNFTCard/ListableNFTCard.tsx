@@ -12,11 +12,9 @@ import { useContract, Web3Button } from "@thirdweb-dev/react";
 import { NATIVE_TOKEN_ADDRESS } from "@thirdweb-dev/sdk";
 import NFTCard from "components/NFTCard";
 import { CollectionModel } from "models/collection/typings";
-// import { useAppDispatch } from "hooks/useStoreHooks";
-// import { updateNftInCollectionToListing } from "models/collection";
 import { Nft } from "models/nft/typings";
 import React from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     collection: CollectionModel;
@@ -26,8 +24,8 @@ type Props = {
 const ListableNFTCard = (props: Props) => {
     const [open, setOpen] = React.useState(false);
     const [price, setPrice] = React.useState(0);
-    // const dispatch = useAppDispatch();
-    const contractAddress = "0xF1f1a1f12061e6Ca40548cDdAF9E870B86D7D22B";
+    const navigate = useNavigate();
+    const contractAddress = process.env.REACT_APP_MARKETPLACE!;
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -36,28 +34,8 @@ const ListableNFTCard = (props: Props) => {
         setOpen(false);
     };
     const { contract } = useContract(contractAddress, "marketplace");
-    // const { mutateAsync: createDirectListing } =
-    //     useCreateDirectListing(contract);
     const handleSubmit = () => {
-        console.log("price", price);
-        // if (marketplace) {
-        //     dispatch(
-        //         updateNftInCollectionToListing({
-        //             contract: marketplace,
-        //             assetContractAddress:
-        //                 "0xF1f1a1f12061e6Ca40548cDdAF9E870B86D7D22B",
-        //             walletAddress: props.nft.owner,
-        //             price,
-        //         })
-        //     );
-        // }
         if (props.collection.data && price && contract) {
-            // createDirectListing({
-            //     assetContractAddress: props.collection.data.contractAddress,
-            //     tokenId: props.nft.metadata.id + "",
-            //     pricePerToken: "0.1",
-            //     quantity: "1",
-            // });
             const listing = {
                 // address of the contract the asset you want to list is on
                 assetContractAddress: props.collection.data.contractAddress,
@@ -74,8 +52,7 @@ const ListableNFTCard = (props: Props) => {
                 // how much the asset will be sold for
                 buyoutPricePerToken: price,
             };
-            const result = contract.direct.createListing(listing);
-            console.log("result", result);
+            contract.direct.createListing(listing);
             setOpen(false);
         }
     };
@@ -133,7 +110,9 @@ const ListableNFTCard = (props: Props) => {
                             overflow: "hidden",
                             borderRadius: 0,
                         }}
-                        // onClick={() => navigate(`/nft/${nft.id}`)}
+                        onClick={() =>
+                            navigate(`/nft/${props.nft.metadata.id}`)
+                        }
                     >
                         Detail
                     </Button>

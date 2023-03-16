@@ -12,7 +12,7 @@ const SellerSection = () => {
                 <Grid container>
                     <Grid
                         item
-                        lg={12}
+                        xs={12}
                         style={{ marginBottom: 5 }}
                         className="seller-section__title"
                     >

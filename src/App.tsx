@@ -8,6 +8,7 @@ import MainLayout from "./layouts/MainLayout";
 import useAppThemes from "./hooks/useAppThemes";
 import PageNotFound from "./pages/PageNotFound";
 import { useAppSelector } from "hooks/useStoreHooks";
+import ScrollToTop from "components/ScrollToTop/ScrollToTop";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 /**
@@ -32,7 +33,10 @@ function App(): JSX.Element {
                                 path={item.path}
                                 element={
                                     <MainLayout>
-                                        <Page />
+                                        <React.Fragment>
+                                            <ScrollToTop />
+                                            <Page />
+                                        </React.Fragment>
                                     </MainLayout>
                                 }
                             />
