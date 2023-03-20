@@ -1,7 +1,4 @@
 import { User } from "models/user/typings";
-// import ava01 from "../images/ava-01.png";
-// import ava02 from "../images/ava-02.png";
-// import ava03 from "../images/ava-03.png";
 
 export const SELLER__DATA: User[] = [
     {
