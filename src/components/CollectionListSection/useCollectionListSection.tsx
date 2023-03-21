@@ -18,7 +18,6 @@ export default function useCollectionListSection(
 ): TrendingHook {
     const dispatch = useAppDispatch();
     const collectionList = useAppSelector((state) => state.collectionList);
-    console.log("collectionList[category]", collectionList[category]);
     useEffect(() => {
         !collectionList[category] &&
             dispatch(loadCollectionListByCategory(category));
