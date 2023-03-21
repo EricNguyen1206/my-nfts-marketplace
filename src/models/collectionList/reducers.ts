@@ -1,8 +1,6 @@
 import { CollectionListModel } from "./typings";
 
-export const initialState: CollectionListModel = {
-    new: [],
-};
+export const initialState: CollectionListModel = {};
 
 const reducers = {};
 

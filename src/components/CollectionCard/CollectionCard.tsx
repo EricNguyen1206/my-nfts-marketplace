@@ -21,7 +21,6 @@ const CollectionCard = ({ collection }: CollectionCardProps) => {
         <Link to={`/collection/${collection.contractAddress}`}>
             <Card
                 sx={{
-                    maxWidth: 345,
                     backgroundColor: theme.palette.background.paper,
                 }}
                 className="collection-card"

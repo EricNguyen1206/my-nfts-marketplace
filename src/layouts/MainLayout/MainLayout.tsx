@@ -1,10 +1,11 @@
 import React from "react";
 import { Toaster } from "react-hot-toast";
-import Footer from "components/Footer/Footer";
-import Header from "components/Header/Header";
+import Footer from "layouts/Footer";
+import Header from "layouts/Header/";
 
 // INTERNAL
 import "./MainLayout.scss";
+import ScrollToTopFab from "layouts/ScrollToTopFab";
 
 type Props = {
     children: JSX.Element;
@@ -17,6 +18,7 @@ const MainLayout = ({ children }: Props) => {
             <Header />
             <main className="layout_main">{children}</main>
             <Footer />
+            <ScrollToTopFab />
         </React.Fragment>
     );
 };

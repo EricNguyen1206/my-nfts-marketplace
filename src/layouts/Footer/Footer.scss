@@ -1,5 +1,6 @@
 @use "styles/" as *;
 
+$bg-gradient-radius: -45deg;
 .footer {
     padding-bottom: $mg-8;
     background: #000;
@@ -7,6 +8,23 @@
     h5 {
         font-size: 1.6rem;
         color: $white;
+    }
+
+    .logo {
+        h2 {
+            background: linear-gradient(
+                $bg-gradient-radius,
+                $secondary-light,
+                $primary-dark,
+                $secondary-light,
+                $primary-dark
+            );
+            background-size: $w-full $h-full;
+            background-clip: text;
+            -webkit-text-stroke: $mg-1 transparent;
+            -webkit-text-fill-color: $dark-1;
+            margin-bottom: $mg-0;
+        }
     }
 
     .list__group {

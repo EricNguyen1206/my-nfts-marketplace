@@ -5,7 +5,6 @@ import {
     Phone,
     Pinterest,
     Twitter,
-    SavingsOutlined,
 } from "@mui/icons-material";
 import "./Footer.scss";
 import { Link } from "react-router-dom";
@@ -13,58 +12,54 @@ import { Container, Grid, List, ListItem, Typography } from "@mui/material";
 
 const MY__ACCOUNT = [
     {
-        display: "Author Profile",
-        url: "/seller-profile",
+        display: "Profile",
+        url: "/profile",
     },
     {
-        display: "Create Item",
-        url: "/create",
+        display: "Login",
+        url: "/login",
     },
     {
-        display: "Collection",
-        url: "/market",
-    },
-    {
-        display: "Edit Profile",
-        url: "/edit-profile",
+        display: "Register",
+        url: "/register",
     },
 ];
 
 const RESOURCES = [
     {
-        display: "Help Center",
-        url: "#",
+        display: "What is Crypto Wallet?",
+        url: "https://eric-dev-blog.vercel.app/post/8",
     },
     {
-        display: "Partner",
-        url: "#",
+        display: "What is Minting?",
+        url: "https://eric-dev-blog.vercel.app/post/7",
     },
     {
-        display: "Community",
-        url: "#",
+        display: "What is NFT?",
+        url: "https://eric-dev-blog.vercel.app/post/6",
     },
     {
-        display: "Activity",
-        url: "#",
+        display: "How to stay safe in Web3",
+        url: "https://eric-dev-blog.vercel.app/post/8",
     },
 ];
 
-const COMPANY = [
+const CATEGORY = [
     {
-        display: "About",
-        url: "#",
+        display: "Art",
+        url: "/category/art",
     },
     {
-        display: "Career",
-        url: "#",
+        display: "Gaming",
+        url: "/category/gaming",
     },
     {
-        display: "Ranking",
-        url: "#",
+        display: "Membership",
+        url: "/category/membership",
     },
     {
-        display: "Contact Us",
-        url: "/contact",
+        display: "Photography",
+        url: "/category/photography",
     },
 ];
 
@@ -84,16 +79,13 @@ const Footer = () => {
                                     gap: "4px",
                                 }}
                             >
-                                <span>
-                                    <SavingsOutlined />
-                                </span>
-                                NFTs
+                                NFTs Marketplace
                             </Typography>
                             <p>
-                                Lorem, ipsum dolor sit amet consectetur
-                                adipisicing elit. Voluptate, quod repellat! Quis
-                                quos dolorum tenetur fuga? Aspernatur rerum quae
-                                amet.
+                                The world&apos;s first and largest digital
+                                marketplace for crypto collectibles and
+                                non-fungible tokens (NFTs). Buy, sell, and
+                                discover exclusive digital items.
                             </p>
                         </div>
                     </Grid>
@@ -121,9 +113,9 @@ const Footer = () => {
                     </Grid>
 
                     <Grid item sm={6} md={6} lg={2} style={{ marginBottom: 4 }}>
-                        <h5>Company</h5>
+                        <h5>Category</h5>
                         <List className="list__group">
-                            {COMPANY.map((item, index) => (
+                            {CATEGORY.map((item, index) => (
                                 <ListItem key={index} className="list__item">
                                     <Link to={item.url}> {item.display} </Link>
                                 </ListItem>
@@ -174,9 +166,8 @@ const Footer = () => {
                     >
                         <p className="copyright">
                             {" "}
-                            Copyrights 2022, Developed by Eric Nguyen.
-                            @EricNguyen1206&apos;s Tech Diary All Rights
-                            Reserved.
+                            Copyrights 2023, Developed by Eric Nguyen & team.
+                            All Rights Reserved.
                         </p>
                     </Grid>
                 </Grid>

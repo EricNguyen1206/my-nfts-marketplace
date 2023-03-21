@@ -8,6 +8,16 @@ declare module "*.png" {
     export default path;
 }
 
+declare module "*.gif" {
+    const path: string;
+    export default path;
+}
+
+declare module "*.webp" {
+    const path: string;
+    export default path;
+}
+
 declare module "*.d.ts" {
     const path: string;
     export default path;

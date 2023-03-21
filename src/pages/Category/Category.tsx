@@ -3,10 +3,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 // INTERNAL
 import "./Category.scss";
-const CategorySection = React.lazy(() => import("components/CategorySection"));
-import GuideSection from "components/GuideSection";
-import CollectionListSection from "components/CollectionListSection";
 import { useParams } from "react-router-dom";
+import GuideSection from "components/GuideSection";
+import CategorySection from "components/CategorySection";
+const CollectionListSection = React.lazy(
+    () => import("components/CollectionListSection")
+);
 
 const Category = () => {
     const { category } = useParams();

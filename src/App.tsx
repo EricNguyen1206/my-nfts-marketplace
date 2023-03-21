@@ -4,11 +4,11 @@ import { ThemeProvider } from "@mui/material";
 
 // INTERNAL
 import { publicRoutes, userRoutes } from "./routes";
-import MainLayout from "./layouts/MainLayout";
+import MainLayout from "layouts/MainLayout";
+import ScrollToTop from "layouts/ScrollToTop";
 import useAppThemes from "./hooks/useAppThemes";
 import PageNotFound from "./pages/PageNotFound";
 import { useAppSelector } from "hooks/useStoreHooks";
-import ScrollToTop from "components/ScrollToTop/ScrollToTop";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 /**
