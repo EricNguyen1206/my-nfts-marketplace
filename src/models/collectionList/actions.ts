@@ -1,23 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // INTERNAL
-import {
-    getCollectionListByCategory,
-    getNewCollections,
-} from "services/collectionApi";
+import { getCollectionListByCategory } from "services/collectionApi";
 import type { Collection } from "models/collection/typings";
-
-/**
- * @loadNewCollectionList action get list of collection from service
- * @return {Promise<Collection[]>}
- */
-const loadNewCollectionList = createAsyncThunk(
-    "collectionList/loadNewCollectionList",
-    async (): Promise<Collection[]> => {
-        const data = await getNewCollections();
-        return data;
-    }
-);
 
 /**
  * @loadCollectionListByCategory action get list of collection from service by category
@@ -29,9 +14,14 @@ const loadCollectionListByCategory = createAsyncThunk(
     async (
         category: string
     ): Promise<{ category: string; data: Collection[] }> => {
-        const data = await getCollectionListByCategory(category);
-        return { category, data };
+        try {
+            const data = await getCollectionListByCategory(category);
+            return { category, data };
+        } catch (e: any) {
+            console.log("error", e);
+            throw new Error("There was error when fetching data!");
+        }
     }
 );
 
-export { loadNewCollectionList, loadCollectionListByCategory };
+export { loadCollectionListByCategory };

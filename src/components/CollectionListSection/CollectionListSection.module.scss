@@ -1,8 +1,9 @@
 @use "styles/" as *;
 
-.trending {
+.collectionList {
     width: $w-full;
-    &__title {
+    &_title {
         color: $light-1;
+        text-transform: capitalize;
     }
 }

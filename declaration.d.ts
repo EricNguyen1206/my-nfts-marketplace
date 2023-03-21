@@ -12,3 +12,13 @@ declare module "*.d.ts" {
     const path: string;
     export default path;
 }
+
+declare module "*.scss" {
+    const content: Record<string, string>;
+    export default content;
+}
+
+declare module "*.css" {
+    const content: Record<string, string>;
+    export default content;
+}

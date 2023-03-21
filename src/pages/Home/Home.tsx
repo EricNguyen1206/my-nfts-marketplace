@@ -5,8 +5,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 const HeroSection = React.lazy(() => import("components/HeroSection"));
 const CategorySection = React.lazy(() => import("components/CategorySection"));
 const SellerSection = React.lazy(() => import("components/SellerSection"));
-const TrendingSection = React.lazy(() => import("components/TrendingSection"));
+const CollectionListSection = React.lazy(
+    () => import("components/CollectionListSection")
+);
 const GuideSection = React.lazy(() => import("components/GuideSection"));
+import { CategoryEnum } from "constants/categories";
 
 const Home = () => {
     return (
@@ -16,7 +19,19 @@ const Home = () => {
             </React.Suspense>
 
             <React.Suspense fallback={<CircularProgress />}>
-                <TrendingSection />
+                <CollectionListSection category={CategoryEnum.ART} />
+            </React.Suspense>
+
+            <React.Suspense fallback={<CircularProgress />}>
+                <CollectionListSection category={CategoryEnum.GAME} />
+            </React.Suspense>
+
+            <React.Suspense fallback={<CircularProgress />}>
+                <CollectionListSection category={CategoryEnum.MEMBERSHIP} />
+            </React.Suspense>
+
+            <React.Suspense fallback={<CircularProgress />}>
+                <CollectionListSection category={CategoryEnum.PHOTOGRAPHY} />
             </React.Suspense>
 
             <React.Suspense fallback={<CircularProgress />}>

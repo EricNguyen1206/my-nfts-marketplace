@@ -20,3 +20,10 @@ export const CATEGORIES = [
         link: "photography",
     },
 ];
+
+export const CategoryEnum = {
+    ART: "art",
+    GAME: "game",
+    MEMBERSHIP: "membership",
+    PHOTOGRAPHY: "photography",
+};

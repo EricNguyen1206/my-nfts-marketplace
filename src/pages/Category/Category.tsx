@@ -1,34 +1,22 @@
 import React from "react";
-import { Container, Grid } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 
 // INTERNAL
 import "./Category.scss";
-import CollectionCard from "components/CollectionCard";
-import useCategory from "./hooks/useCategory";
-import CategorySection from "components/CategorySection";
+const CategorySection = React.lazy(() => import("components/CategorySection"));
 import GuideSection from "components/GuideSection";
+import CollectionListSection from "components/CollectionListSection";
+import { useParams } from "react-router-dom";
 
 const Category = () => {
-    const { category, collectionList } = useCategory();
+    const { category } = useParams();
     return (
         <React.Fragment>
-            <Container className="category">
-                <Grid container spacing={3}>
-                    {category &&
-                        { ...collectionList }[category]?.map((item) => (
-                            <Grid
-                                item
-                                lg={3}
-                                md={4}
-                                sm={6}
-                                key={item.name}
-                                className="trending__item"
-                            >
-                                <CollectionCard collection={item} />
-                            </Grid>
-                        ))}
-                </Grid>
-            </Container>
+            {category && (
+                <React.Suspense fallback={<CircularProgress />}>
+                    <CollectionListSection category={category} />
+                </React.Suspense>
+            )}
             <CategorySection />
             <GuideSection />
         </React.Fragment>

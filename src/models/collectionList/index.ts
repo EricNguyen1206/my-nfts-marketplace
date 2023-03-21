@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loadCollectionListByCategory, loadNewCollectionList } from "./actions";
+import { loadCollectionListByCategory } from "./actions";
 
 // INTERNAL
 import reducers, { initialState } from "./reducers";
@@ -9,31 +9,14 @@ const collectionListSlice = createSlice({
     initialState,
     reducers: reducers,
     extraReducers: (builder) => {
-        builder
-            .addCase(loadNewCollectionList.fulfilled, (state, action) => {
-                state.new = action.payload;
-            })
-            .addCase(
-                loadCollectionListByCategory.fulfilled,
-                (state, action) => {
-                    switch (action.payload.category) {
-                        case "art":
-                            state.art = action.payload.data;
-                            break;
-                        case "game":
-                            state.game = action.payload.data;
-                            break;
-                        case "membership":
-                            state.membership = action.payload.data;
-                            break;
-                        case "photography":
-                            state.photography = action.payload.data;
-                            break;
-                    }
-                }
-            );
+        builder.addCase(
+            loadCollectionListByCategory.fulfilled,
+            (state, action) => {
+                state[action.payload.category] = action.payload.data;
+            }
+        );
     },
 });
 
-export { loadNewCollectionList };
+export { loadCollectionListByCategory };
 export default collectionListSlice.reducer;

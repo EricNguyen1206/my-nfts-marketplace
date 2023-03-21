@@ -140,19 +140,23 @@ const getCollectionListByAddress = async (
 const getCollectionListByCategory = async (
     category: string
 ): Promise<Collection[]> => {
-    try {
-        const dbRef = ref(firebaseDatabase, `collections`);
-        const snapshot = await get(query(dbRef));
-        if (snapshot && snapshot.val()) {
-            return Object.values<Collection>(snapshot.val()).filter(
-                (item: Collection) => item.category === category
-            );
-        } else {
-            throw new Error("Fetching resource error!");
-        }
-    } catch (e) {
-        throw new Error("Fetching resource error!");
-    }
+    const dbRef = ref(firebaseDatabase, `collections`);
+    const snapshot = await get(query(dbRef));
+    return Object.values<Collection>(snapshot.val()).filter(
+        (item: Collection) => item.category === category
+    );
+    // try {
+    //     const snapshot = await get(query(dbRef));
+    //     if (snapshot && snapshot.val()) {
+    //         return Object.values<Collection>(snapshot.val()).filter(
+    //             (item: Collection) => item.category === category
+    //         );
+    //     } else {
+    //         throw new Error("Fetching resource error!");
+    //     }
+    // } catch (e) {
+    //     throw new Error("Fetching resource error!");
+    // }
 };
 
 /**
